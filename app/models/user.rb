@@ -17,12 +17,6 @@ class User < ActiveRecord::Base
     facebook.get_connections :me, :friends
   end
 
-  private
-  # Facebook API wrapper
-  def facebook
-    @api ||= Koala::Facebook::API.new(self.oauth_token)
-  end
-
   # Get a list of possibly close friends from which we'll pick the one to
   # guess. We use the user's last status updates' likes and comments, as
   # this is an indication of recent activity with those users.
@@ -54,4 +48,12 @@ class User < ActiveRecord::Base
       friends.sort_by(&:last).map!(&:first).reverse!
     end
   end
+
+  private
+
+    # Facebook API wrapper
+    def facebook
+      @api ||= Koala::Facebook::API.new(self.oauth_token)
+    end
+
 end
