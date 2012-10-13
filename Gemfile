@@ -19,6 +19,7 @@ end
 
 gem 'jquery-rails'
 gem 'omniauth-facebook'
+gem 'koala', '~> 1.5.0'
 
 group :development do
   gem 'capistrano'
