@@ -1,7 +1,11 @@
 <p id="hint"><%= @game.next_hint %></p>
 
 <input type="button" id="next-hint" value="Next hint" data-url="<%= next_hint_path %>"/>
-<input type="button" id="new-game" value="I lose, new game" data-url="<%= restart_path %>" />
+<input type="button" id="i-got-it" value="I Got It!"/>
+<input type="button" id="new-game" value="I lose, new game" />
+
+<input type="hidden" id="restart-url" value="<%= restart_path %>" />
+<input type="hidden" id="home-url" value="<%= root_path %>" />
 
 <% @game.people.each do |friend| %>
   <%= content_tag :div, :class => 'friend', :id => friend['id'], 'data-url' => eliminate_path(friend['id']) do -%>
