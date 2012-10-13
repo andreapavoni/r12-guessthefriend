@@ -7,7 +7,8 @@ Guesswho::Application.routes.draw do
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
   root to: 'site#index'
-  match '/play', to: 'site#play'
+  get '/play', to: 'site#play'
 
-  get '/g/del', to: 'site#eliminate'
+  get '/g/del',   to: 'site#eliminate'
+  get '/g/trash', to: 'site#restart'
 end

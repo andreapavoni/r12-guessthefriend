@@ -9,6 +9,11 @@ class SiteController < ApplicationController
     @game = Game.make(current_user, current_game) unless @game
   end
 
+  def restart
+    new_game!
+    redirect_to root_path
+  end
+
   # Called when an user eliminates a guess. If it is right, then
   # 200 is returned, else 418 - I'm a Teapot ;-).
   #
