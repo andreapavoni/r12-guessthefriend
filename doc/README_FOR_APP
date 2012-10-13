@@ -7,4 +7,5 @@ some_friends= me.friends
 close_friends_id= me.possibly_close_friends
 target_friend_id= me.possibly_close_friends.sample
 target_friend= me.facebook.get_object(target_friend_id)
-clues= me.facebook.get_object(target_friend_id).each_key{|k| puts k}
+new_target= User.find_by_name("Claudio Floreani").random_close_friend
+new_target.suitable?

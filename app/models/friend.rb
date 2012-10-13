@@ -28,13 +28,14 @@ class Friend
 
   # Returns true if we have enough information for this user to
   # play a game.
+  # We can check if we have a suitable target using: me.random_close_friend.suitable?
   def suitable?
     @suitable ||= begin
       info = AvailableHints.inject([]) do |ary, attr|
         ary.concat Array.wrap(send(attr))
       end
 
-      info.size > 5
+      info.size >= 7
     end
   end
 
