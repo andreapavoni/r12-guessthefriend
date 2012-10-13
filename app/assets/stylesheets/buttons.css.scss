@@ -1,0 +1,40 @@
+@import "colors.scss";
+
+.button {
+  display: inline-block;
+  padding: 5px;
+  border-radius: 5px;
+  border-style: solid;
+  text-align: center;
+  text-decoration: none;
+
+  &.blue {
+    background-color: $base-color;
+    border-color: $dark-text-color;
+    color: $light-text-color;
+    text-shadow: $dark-text-color 0 2px 0;
+  }
+
+  &.size-maxi {
+    height: 95px;
+    border-width: 2px;
+    padding: 10px 20px;
+    font-size: 40px;
+  }
+
+  &.icon-facebook {
+    line-height: 69px;
+    vertical-align: middle;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 69px;
+      height: 69px;
+      margin-right: 10px;
+      background-image: url('/assets/facebook_logo.png');
+      vertical-align: middle;
+    }
+  }
+}
+
