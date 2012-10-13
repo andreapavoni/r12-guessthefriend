@@ -24,7 +24,7 @@ class SiteController < ApplicationController
   #
   def restart
     new_game!
-    redirect_to root_path
+    redirect_to play_path
   end
 
   # Called when an user eliminates a guess. If it is right, then

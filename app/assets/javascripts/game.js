@@ -45,9 +45,21 @@ $(function () {
           //
           people.filter (':not([id='+person.attr('id')+'])').fadeOut ();
           alert ('YOO L0SE!');
+
+          if (confirm ('Wanna play again?'))
+            restart.go ();
         }
       }
     });
+  });
 
+  var restart = $('#new-game');
+  restart.go = function () {
+    window.location.href = restart.data ('url');
+  };
+
+  restart.click (function () {
+    if (confirm ('Sure, pal?'))
+      restart.go ();
   });
 });
