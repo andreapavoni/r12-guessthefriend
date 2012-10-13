@@ -12,9 +12,21 @@ class User < ActiveRecord::Base
     end
   end
 
-  # Find all friends
-  def get_friends
-    facebook.get_connections :me, :friends
+  # Get friends ready for the game. We need a *close friend* to make
+  # the guess easier, then the remaining 23 picked from *all friends*
+  #
+  def friends(options={})
+    options =  {limit: 10}.merge(options)
+    q = [ 'id in (select uid2 from #friends)' ]
+
+    if target_id = options[:except]
+      q.push "id != #{target_id}"
+    end
+
+    remaining_friends = facebook.fql_multiquery(
+      friends: "select uid2 from friend where uid1 = me()",
+      detail: "select id, name, pic from profile where #{q.join(' AND ')}"
+    )['detail'].sample(options[:limit])
   end
 
   # Get a list of possibly close friends from which we'll pick the one to
@@ -49,11 +61,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  private
-
-    # Facebook API wrapper
-    def facebook
-      @api ||= Koala::Facebook::API.new(self.oauth_token)
-    end
-
+  # Facebook API wrapper
+  def facebook
+    @api ||= Koala::Facebook::API.new(self.oauth_token)
+  end
 end
