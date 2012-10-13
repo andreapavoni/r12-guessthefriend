@@ -11,4 +11,9 @@ class User < ActiveRecord::Base
       user.save!
     end
   end
+
+  # Facebook API wrapper
+  def facebook
+    @api ||= Koala::Facebook::API.new(self.oauth_token)
+  end
 end
