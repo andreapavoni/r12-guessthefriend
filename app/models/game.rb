@@ -40,7 +40,7 @@ class Game < ActiveRecord::Base
   # TODO REMOVE ME - hints must be generated in Game.make and serialized to
   # the database.
   def hints
-    Friend.hints
+    Friend.new(User.find(user_id), target['id']).hints
   end
 
   # TODO - do not return a random hint, rather use the stored
