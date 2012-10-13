@@ -10,8 +10,8 @@ class SiteController < ApplicationController
   end
 
   private
-    def find_game
-      @game = Game.by_token(current_game)
-    end
+  def find_game
+    @game = Game.by_token(current_game)
+  end
 
 end

@@ -3,6 +3,8 @@ class Game < ActiveRecord::Base
 
   validates :target, :guesses, :user_id, presence: true
 
+  attr_accessible :target_id, :user_id, :hints
+
   serialize :target
   serialize :guesses
 
