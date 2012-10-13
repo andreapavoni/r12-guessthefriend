@@ -26,6 +26,7 @@ class Game < ActiveRecord::Base
       # Guesses
       g.guesses = user.friends(limit: 23, except: g.target['id']).shuffle!
 
+      # Hints
       g.hints = Friend.new(User.find(user.id), g.target['id']).hints
 
       g.save!
