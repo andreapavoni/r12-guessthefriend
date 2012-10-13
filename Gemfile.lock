@@ -168,7 +168,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   debugger
   jquery-rails
-  koala
+  koala (~> 1.5.0)
   omniauth-facebook
   pg
   pry
