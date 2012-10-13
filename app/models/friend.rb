@@ -41,7 +41,8 @@ class Friend
 
   # Returns true if we have enough information for this user to
   # play a game.
-  # We can check if we have a suitable target using: me.random_close_friend.suitable?
+  # We can check if the target is suitable using Friend#suitable?.
+  # See also User#suitable_close_friend.
   def suitable?
     @suitable ||= begin
                     info = AvailableHints.keys.inject([]) do |ary, attr|
@@ -64,6 +65,12 @@ class Friend
       end
     end
     assertions.shuffle
+  end
+
+  def to_h
+    {'id'  => id,
+    'name' => name,
+    'pic'  => @api.get_object(id, :fields => 'picture')['picture']['data']['url']}
   end
 
   private

@@ -40,8 +40,15 @@ class User < ActiveRecord::Base
     facebook.fql_query("select id, name, pic from profile where id = #{id}").first
   end
 
-  def random_close_friend
-    Friend.new(self, possibly_close_friends.sample)
+  # Tries to randomly find a suitable close friend who shared enough
+  # information to build enough hints to play the game.
+  #
+  def suitable_close_friend
+    choices = possibly_close_friends.shuffle
+    loop do
+      friend = Friend.new(self, choices.shift)
+      return friend if friend.suitable?
+    end
   end
 
   # Get a list of possibly close friends from which we'll pick the one to
