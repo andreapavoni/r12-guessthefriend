@@ -28,8 +28,8 @@ require 'bundler/capistrano'
 ##                                         ##
 #############################################
 
-GITHUB_REPOSITORY_NAME = ''
-LINODE_SERVER_HOSTNAME = ''
+GITHUB_REPOSITORY_NAME = 'r12-team-43'
+LINODE_SERVER_HOSTNAME = '198.74.58.152'
 
 #############################################
 #############################################
@@ -38,25 +38,17 @@ LINODE_SERVER_HOSTNAME = ''
 
 set :bundle_flags,               "--deployment"
 
-set :application,                "railsrumble"
-set :deploy_to,                  "/var/www/apps/railsrumble"
+set :application,                "guesswho"
+set :deploy_to,                  "/home/rails"
 set :normalize_asset_timestamps, false
 set :rails_env,                  "production"
 
-set :user,                       "root"
-set :runner,                     "www-data"
-set :admin_runner,               "www-data"
+set :user,                       "rails"
+set :runner,                     "rails"
+set :admin_runner,               "rails"
 
-# Password-less Deploys (Optional)
-#
-# 1. Locate your local public SSH key file. (Usually ~/.ssh/id_rsa.pub)
-# 2. Execute the following locally: (You'll need your Linode server's root password.)
-#
-#    cat ~/.ssh/id_rsa.pub | ssh root@LINODE_SERVER_HOSTNAME "cat >> ~/.ssh/authorized_keys"
-#
-# 3. Uncomment the below ssh_options[:keys] line in this file.
-#
-# ssh_options[:keys] = ["~/.ssh/id_rsa"]
+ssh_options[:forward_agent] = true
+ssh_options[:auth_methods]  = %w( publickey )
 
 # SCM Options
 set :scm,        :git
@@ -76,14 +68,11 @@ after 'deploy:update_code' do
   run "cd #{release_path}; RAILS_ENV=production bundle exec rake assets:precompile"
 end
 
-# Restart Passenger
+# Restart Unicorn
 deploy.task :restart, :roles => :app do
-  # Fix Permissions
-  sudo "chown -R www-data:www-data #{current_path}"
-  sudo "chown -R www-data:www-data #{latest_release}"
-  sudo "chown -R www-data:www-data #{shared_path}/bundle"
-  sudo "chown -R www-data:www-data #{shared_path}/log"
-
-  # Restart Application
-  run "touch #{current_path}/tmp/restart.txt"
+  pid = "#{deploy_to}/.unicorn.pid"
+  run "test -f #{pid} && kill -USR2 `cat #{pid}` || true"
 end
+
+set :bundle_flags, "--deployment --quiet --binstubs #{deploy_to}/bin"
+set :rake,         "bundle exec rake"
