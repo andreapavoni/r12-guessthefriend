@@ -32,4 +32,8 @@ class Game < ActiveRecord::Base
   def people
     (self.guesses + [self.target]).shuffle!
   end
+
+  def target_id
+    self.target['id']
+  end
 end
