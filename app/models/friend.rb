@@ -39,13 +39,15 @@ class Friend
     end
   end
 
-  # If target Friend is suitable (has enough available hints)
-  # returns an array of sentences related to those hints
-  # otherwise returns nil
-  def hints
-    if @suitable
-      attributes
-    end
+  # Generates and returns a list of hints for this Friend using the
+  # information we've gathered.
+  def self.hints
+    # FIXME actually implement this.
+
+    ['Has really big toes',
+     'Foo bar baz Antani',
+     'Hello World I\'m a Teapot!'
+    ]
   end
   
   # Returns the list of the filled attributes for this Friend

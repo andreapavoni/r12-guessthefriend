@@ -36,4 +36,10 @@ class Game < ActiveRecord::Base
   def target_id
     self.target['id']
   end
+
+  # TODO REMOVE ME - hints must be generated in Game.make and serialized to
+  # the database.
+  def hints
+    Friend.hints
+  end
 end
