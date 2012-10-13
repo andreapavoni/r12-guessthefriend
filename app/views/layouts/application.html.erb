@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
   <head>
     <title>Guesswho</title>
       <%= stylesheet_link_tag    "application", :media => "all" %>
@@ -7,6 +8,21 @@
       <%= csrf_meta_tags %>
   </head>
   <body>
+=======
+<head>
+  <title>Guesswho</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <%# + GOOGLE ANALYTICS + %>
+  <%# Place this onto every page you want to track immediately before the </HEAD> tag. %>
+  <%= render( partial: 'shared/google_analytics',
+    object: GOOGLE_ANALYTICS_TRACKING_ID )
+  %>
+  <%# = GOOGLE ANALYTICS = %>
+</head>
+<body>
+>>>>>>> [~] renders the partial for google_analytics
 
     <div id="user_nav">
       <% if current_user %>
