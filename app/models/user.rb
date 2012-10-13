@@ -32,17 +32,20 @@ class User < ActiveRecord::Base
   #
   def possibly_close_friends
     Rails.cache.fetch("user/#{uid}/close_friends", :expires_in => 600, :race_condition_ttl => 5) do
+
+      filter = lambda {|u| u['name'] != 'Facebook User' }
+
       friends = facebook.get_connections('me', 'statuses').inject(Hash.new(0)) do |friends, status|
         if status['likes'].present?
-          status['likes']['data'].each {|l| friends[l['id']] += 1}
+          status['likes']['data'].each {|u| friends[u['id']] += 1 if filter.call(u) }
         end
 
         if status['comments'].present?
-          status['comments']['data'].each {|c| friends[c['from']['id']] += 1}
+          status['comments']['data'].each {|u| friends[u['from']['id']] += 1 if filter.call(u['from']) }
         end
 
         if status['tags'].present?
-          status['tags']['data'].each {|c| friends[c['id']] += 1}
+          status['tags']['data'].each {|u| friends[u['id']] += 1 if filter.call(u) }
         end
 
         friends
