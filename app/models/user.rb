@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
           status['comments']['data'].each {|c| friends.add c['from']['id']}
         end
 
+        if status['tags'].present?
+          status['tags']['data'].each {|c| friends.add c['id']}
+        end
+
         friends.to_a
       end
     end
