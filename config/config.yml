@@ -1,0 +1,12 @@
+facebook: &facebook
+  app_id: 12345
+  secret: 4567
+
+development:
+  <<: *facebook
+
+test:
+  <<: *facebook
+
+production:
+  <<: *facebook
