@@ -37,7 +37,12 @@ class SiteController < ApplicationController
   def eliminate
     head :bad_request and return unless params[:id].present?
 
-    head(params[:id] == @game.target_id ? 418 : :ok)
+    if params[:id] ==  @game.target_id
+      head(418)
+    else
+      @game.update_score!
+      head(:ok)
+    end
   end
 
   private
