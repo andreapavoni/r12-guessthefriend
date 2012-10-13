@@ -14,6 +14,8 @@ class SiteController < ApplicationController
     @game = Game.make(current_user, current_game) unless @game
   end
 
+  # Returns the next hint for the current game as a JSON string.
+  #
   def hint
     render :json => @game.next_hint
   end
