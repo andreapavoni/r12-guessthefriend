@@ -1,0 +1,6 @@
+<% @friends.each do |friend| %>
+  <%= content_tag :div, class: 'friend', id: friend['id'] do -%>
+    <%= image_tag friend['pic'], alt: friend['name'], size: '100x100' %>
+    <span><%= friend['name'] %></span>
+  <% end -%>
+<% end %>

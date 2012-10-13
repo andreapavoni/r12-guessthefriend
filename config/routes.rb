@@ -7,6 +7,7 @@ Guesswho::Application.routes.draw do
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
   root to: 'site#index'
+  match '/play', to: 'site#play'
 
   # See how all your routes lay out with "rake routes"
 
