@@ -22,6 +22,8 @@ gem 'omniauth-facebook'
 
 group :development do
   gem 'capistrano'
+  gem 'debugger'
+  gem 'pry'
 end
 
 group :production do
