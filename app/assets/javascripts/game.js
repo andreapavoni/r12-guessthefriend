@@ -49,7 +49,9 @@ $(function () {
           if (confirm ('Wanna play again?'))
             restart.go ();
         }
-      }
+      },
+
+      error: oh_so_sorry
     });
   });
 
