@@ -12,21 +12,30 @@ class User < ActiveRecord::Base
     end
   end
 
-  # Get friends ready for the game. We need a *close friend* to make
-  # the guess easier, then the remaining 23 picked from *all friends*
+  # Get this user's friends. Returns 10 entries by default, change using the
+  # :limit option. You can skip a single UID by passing the :except option.
+  #
+  # Returns an Array of Hashes with the id, name and pic keys.
   #
   def friends(options={})
     options =  {limit: 10}.merge(options)
     q = [ 'id in (select uid2 from #friends)' ]
 
-    if target_id = options[:except]
-      q.push "id != #{target_id}"
+    if skip = options[:except]
+      q.push "id != #{skip}"
     end
 
-    remaining_friends = facebook.fql_multiquery(
+    facebook.fql_multiquery(
       friends: "select uid2 from friend where uid1 = me()",
       detail: "select id, name, pic from profile where #{q.join(' AND ')}"
     )['detail'].sample(options[:limit])
+  end
+
+  # Gets the given friend ID.
+  #
+  # Returns an Hash in the same format returned by +friends+.
+  def friend(id)
+    facebook.fql_query("select id, name, pic from profile where id = #{id}")
   end
 
   # Get a list of possibly close friends from which we'll pick the one to
