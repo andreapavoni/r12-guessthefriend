@@ -39,6 +39,15 @@ class Friend
     end
   end
 
+  # If target Friend is suitable (has enough available hints)
+  # returns an array of sentences related to those hints
+  # otherwise returns nil
+  def hints
+    if @suitable
+      attributes
+    end
+  end
+  
   # Returns the list of the filled attributes for this Friend
   def attributes
     AvailableHints.select {|a| send(a).present?}
