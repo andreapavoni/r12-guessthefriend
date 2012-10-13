@@ -22,4 +22,26 @@ class User < ActiveRecord::Base
   def facebook
     @api ||= Koala::Facebook::API.new(self.oauth_token)
   end
+
+  # Get a list of possibly close friends from which we'll pick the one to
+  # guess. We use the user's last status updates' likes and comments, as
+  # this is an indication of recent activity with those users.
+  #
+  # Returns an Array of user IDs to pick from.
+  #
+  def possibly_close_friends
+    Rails.cache.fetch("user/#{uid}/close_friends", :expires_in => 600, :race_condition_ttl => 5) do
+      facebook.get_connections('me', 'statuses').inject(Set.new) do |friends, status|
+        if status['likes'].present?
+          status['likes']['data'].each {|l| friends.add l['id']}
+        end
+
+        if status['comments'].present?
+          status['comments']['data'].each {|c| friends.add c['from']['id']}
+        end
+
+        friends.to_a
+      end
+    end
+  end
 end
