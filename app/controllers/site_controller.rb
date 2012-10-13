@@ -32,16 +32,12 @@ class SiteController < ApplicationController
   #
   # Params:
   #
-  #  * guess: Facebook User ID of the guess to be eliminated.
+  #  * id: Facebook User ID of the guess to be eliminated.
   #
   def eliminate
-    head :bad_request and return unless params[:guess].present?
+    head :bad_request and return unless params[:id].present?
 
-    if params[:guess].to_i == @game.target_id
-      head 418
-    else
-      head :ok
-    end
+    head(params[:id] == @game.target_id ? 418 : :ok)
   end
 
   private

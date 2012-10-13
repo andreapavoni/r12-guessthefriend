@@ -1,9 +1,9 @@
-<p id="hint"><%= @game.hints.first %></p>
+<p id="hint"><%= @game.next_hint %></p>
 
 <input type="button" id="next-hint" value="Next hint" data-url="<%= next_hint_path %>"/>
 
 <% @game.people.each do |friend| %>
-  <%= content_tag :div, class: 'friend', id: friend['id'] do -%>
+  <%= content_tag :div, :class => 'friend', :id => friend['id'], 'data-url' => eliminate_path(friend['id']) do -%>
     <%= image_tag friend['pic'], alt: friend['name'] %>
     <span><%= friend['name'] %></span>
   <% end -%>

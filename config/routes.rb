@@ -9,7 +9,7 @@ Guesswho::Application.routes.draw do
   root to: 'site#index'
   get '/play', to: 'site#play'
 
-  get '/g/del',   to: 'site#eliminate', as: :eliminate
-  get '/g/trash', to: 'site#restart',   as: :restart
-  get '/g/next',  to: 'site#hint',      as: :next_hint
+  get '/g/del/:id', to: 'site#eliminate', as: :eliminate
+  get '/g/trash',   to: 'site#restart',   as: :restart
+  get '/g/next',    to: 'site#hint',      as: :next_hint
 end
