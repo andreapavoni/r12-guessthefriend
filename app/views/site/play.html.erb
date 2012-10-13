@@ -1,4 +1,6 @@
-<p class="hint"><%= @game.hints.first %></p>
+<p id="hint"><%= @game.hints.first %></p>
+
+<input type="button" id="next-hint" value="Next hint" data-url="<%= next_hint_path %>"/>
 
 <% @game.people.each do |friend| %>
   <%= content_tag :div, class: 'friend', id: friend['id'] do -%>
