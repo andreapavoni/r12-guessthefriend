@@ -3,7 +3,7 @@ class Game < ActiveRecord::Base
 
   validates :target, :guesses, :user_id, presence: true
 
-  attr_accessible :target_id, :user_id, :hints
+  attr_accessible :hints
 
   serialize :target
   serialize :guesses
@@ -31,5 +31,9 @@ class Game < ActiveRecord::Base
 
   def people
     (self.guesses + [self.target]).shuffle!
+  end
+
+  def target_id
+    self.target['id']
   end
 end
