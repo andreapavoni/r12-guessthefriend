@@ -11,25 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013172931) do
-
-  create_table "clues", :force => true do |t|
-    t.string   "key"
-    t.string   "question_it"
-    t.string   "question_en"
-    t.integer  "credits"
-    t.integer  "used"
-    t.integer  "guessed"
-    t.text     "comment"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
+ActiveRecord::Schema.define(:version => 20121013195816) do
 
   create_table "games", :force => true do |t|
     t.integer  "user_id"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
-    t.string   "token",      :limit => 24
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.integer  "current_int",               :default => 0
+    t.text     "hints"
+    t.string   "token",       :limit => 24
     t.text     "guesses"
     t.text     "target"
   end
