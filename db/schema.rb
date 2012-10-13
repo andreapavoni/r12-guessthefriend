@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013205525) do
+ActiveRecord::Schema.define(:version => 20121013230056) do
 
   create_table "games", :force => true do |t|
     t.integer  "user_id"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20121013205525) do
     t.text     "target"
     t.text     "hints"
     t.integer  "current_hint",               :default => 0
+    t.integer  "score",                      :default => 0
   end
 
   create_table "users", :force => true do |t|
