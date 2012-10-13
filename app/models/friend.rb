@@ -3,7 +3,7 @@
 #
 class Friend
   Attributes = [
-    :gender, :athletes, :languages, :birthday, :hometown, :work, :likes,
+    :gender, :favorite_athletes, :languages, :birthday, :hometown, :work, :likes, :relationship_status,
     :groups, :events, :bio, :quotes
   ]
 
@@ -65,11 +65,11 @@ class Friend
         target['gender']
       end
 
-      @relationship = if target['relationship_status'].present?
+      @relationship_status = if target['relationship_status'].present?
         target['relationship_status']
       end
 
-      @athletes = if target['favorite_athletes'].present?
+      @favorite_athletes = if target['favorite_athletes'].present?
         target['favorite_athletes'].
           map {|x| x['name']}.
           reject! {|x| x.count(' ')}
