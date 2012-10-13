@@ -13,3 +13,27 @@
  *= require main
  *= require_tree .
  */
+
+body {
+  max-width: 1024px;
+  margin: 0 auto;
+  background-image: url('/assets/background.png');
+}
+
+.logo {
+  display: block;
+  width: 203px;
+  height: 203px;
+  margin: 10px auto;
+  background-image: url('/assets/logo.png');
+}
+
+.social-share {
+  width: 50%;
+  float: left;
+
+  .facebook-like, .tweet-count, .google-plus-count {
+    float: left;
+  }
+}
+

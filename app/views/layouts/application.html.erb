@@ -9,14 +9,13 @@
 </head>
 <body>
 
-    <div id="user_nav">
-      <% if current_user %>
-        Signed in as <strong><%= current_user.name %></strong>!
-        <%= link_to "Sign out", signout_path, id: "sign_out" %>
-      <% else %>
-        <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-      <% end %>
-    </div>
+  <a href="/" class="logo ir">Guess the Friend!</a>
+
+  <div class="social-share">
+    <div class="facebook-like">FB Like</div>
+    <div class="tweet-count">Tweet count</div>
+    <div class="google-plus-count">Google plus</div>
+  </div>
 
     <!-- Place this tag everywhere you want a +1 button -->
     <g:plusone></g:plusone>
