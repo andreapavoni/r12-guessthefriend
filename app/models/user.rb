@@ -12,6 +12,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  # Find all friends
+  def get_friends
+    facebook.get_connections :me, :friends
+  end
+
+  private
   # Facebook API wrapper
   def facebook
     @api ||= Koala::Facebook::API.new(self.oauth_token)
