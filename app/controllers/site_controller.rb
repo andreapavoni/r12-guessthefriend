@@ -1,6 +1,6 @@
 class SiteController < ApplicationController
-  before_filter :authenticate_user, only: [:play]
-  before_filter :find_game, except: [:index]
+  before_filter :authenticate_user, except: [:index]
+  before_filter :find_game,         except: [:index]
 
   # Displays the home page.
   #
