@@ -2,12 +2,10 @@
 # all available information from it.
 #
 class Friend
-  Attributes = [
-    :gender, :favorite_athletes, :languages, :birthday, :hometown, :work, :likes, :relationship_status,
-    :groups, :events, :bio, :quotes
-  ]
-
-  Attributes.each {|attr| attr_reader attr}
+  
+  AvailableHints = Clue.all.map &:key.to_sym
+  
+  AvailableHints.each {|attr| attr_reader attr}
 
   attr_reader :id, :target
 
@@ -32,7 +30,7 @@ class Friend
   # play a game.
   def suitable?
     @suitable ||= begin
-      info = Attributes.inject([]) do |ary, attr|
+      info = AvailableHints.inject([]) do |ary, attr|
         ary.concat Array.wrap(send(attr))
       end
 
@@ -42,7 +40,7 @@ class Friend
 
   # Returns the list of the filled attributes for this Friend
   def attributes
-    Attributes.select {|a| send(a).present?}
+    AvailableHints.select {|a| send(a).present?}
   end
 
   private
