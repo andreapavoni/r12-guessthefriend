@@ -5,9 +5,11 @@ TODO
 App setup:
 
  * Clone the repo
+ * Add "127.0.0.1 dev.r12.railsrumble.com" to your /etc/hosts (as root)
  * mkdir log/
  * bundle
  * rails server
+ * Go to http://dev.r12.railsrumble.com:3000/ - required to work around FB auth strictness
 
 App deploy:
 
