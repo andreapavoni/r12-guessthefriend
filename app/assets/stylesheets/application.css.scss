@@ -9,6 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= depend_on _colors.scss
  *= require normalize.2.0.1
  *= require main
  *= require_tree .
