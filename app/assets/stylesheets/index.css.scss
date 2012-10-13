@@ -1,0 +1,16 @@
+.home {
+
+  margin-top: 40px;
+
+  .col-1-2 {
+    > h1 {
+      margin-top: 0;
+    }
+  }
+
+  span.caption {
+    text-align: center;
+    display: block;
+  }
+}
+
