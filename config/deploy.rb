@@ -54,6 +54,7 @@ ssh_options[:auth_methods]  = %w( publickey )
 set :scm,        :git
 set :repository, "git@github.com:railsrumble/#{GITHUB_REPOSITORY_NAME}.git"
 set :branch,     "master"
+set :use_sudo,   false
 
 # Roles
 role :app, LINODE_SERVER_HOSTNAME
