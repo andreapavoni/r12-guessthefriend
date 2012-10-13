@@ -53,7 +53,7 @@ ssh_options[:auth_methods]  = %w( publickey )
 # SCM Options
 set :scm,        :git
 set :repository, "git@github.com:railsrumble/#{GITHUB_REPOSITORY_NAME}.git"
-set :branch,     "master"
+set :branch,     fetch(:branch, "master")
 set :use_sudo,   false
 
 # Roles
