@@ -2,13 +2,20 @@ class SiteController < ApplicationController
   before_filter :authenticate_user, only: [:play]
   before_filter :find_game, except: [:index]
 
+  # Displays the home page.
+  #
   def index
   end
 
+  # Starts a new game if no current game is in progress, or
+  # resumes the last played game.
+  #
   def play
     @game = Game.make(current_user, current_game) unless @game
   end
 
+  # Abandons the current game and redirects to the home page.
+  #
   def restart
     new_game!
     redirect_to root_path
