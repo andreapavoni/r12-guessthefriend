@@ -20,7 +20,7 @@ class Game < ActiveRecord::Base
       g.user_id = user.id
 
       # Target
-      g.target = user.friend(user.possibly_close_friends.sample)
+      g.target = user.suitable_close_friend.to_h
 
       # Guesses
       g.guesses = user.friends(limit: 23, except: g.target['id']).shuffle!
