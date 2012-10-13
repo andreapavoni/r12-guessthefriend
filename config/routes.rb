@@ -11,4 +11,5 @@ Guesswho::Application.routes.draw do
 
   get '/g/del',   to: 'site#eliminate'
   get '/g/trash', to: 'site#restart'
+  get '/g/next',  to: 'site#hint'
 end

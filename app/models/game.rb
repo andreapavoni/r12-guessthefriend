@@ -42,4 +42,12 @@ class Game < ActiveRecord::Base
   def hints
     Friend.hints
   end
+
+  # TODO - do not return a random hint, rather use the stored
+  # current_hint_index to return the next one, and increment it,
+  # wrapping after it reaches hints.size.
+  #
+  def next_hint
+    hints.sample
+  end
 end

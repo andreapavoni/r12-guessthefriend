@@ -14,6 +14,10 @@ class SiteController < ApplicationController
     @game = Game.make(current_user, current_game) unless @game
   end
 
+  def hint
+    render :json => @game.next_hint
+  end
+
   # Abandons the current game and redirects to the home page.
   #
   def restart
