@@ -1,4 +1,4 @@
-<% @friends.each do |friend| %>
+<% @game.people.each do |friend| %>
   <%= content_tag :div, class: 'friend', id: friend['id'] do -%>
     <%= image_tag friend['pic'], alt: friend['name'] %>
     <span><%= friend['name'] %></span>

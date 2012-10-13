@@ -6,12 +6,7 @@ class SiteController < ApplicationController
   end
 
   def play
-    @game = Game.make(current_user) unless @game
-
-    target = current_user.friend @game.target_id
-
-    @friends = current_user.friends(limit: 23, except: @game.target_id)
-    (@friends << target).shuffle!
+    @game = Game.make(current_user, current_game) unless @game
   end
 
   private

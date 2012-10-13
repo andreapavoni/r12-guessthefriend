@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013172241) do
+ActiveRecord::Schema.define(:version => 20121013172931) do
 
   create_table "clues", :force => true do |t|
     t.string   "key"
@@ -27,10 +27,11 @@ ActiveRecord::Schema.define(:version => 20121013172241) do
 
   create_table "games", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "target_id"
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
-    t.string   "token",      :limit => 16
+    t.string   "token",      :limit => 24
+    t.text     "guesses"
+    t.text     "target"
   end
 
   create_table "users", :force => true do |t|
