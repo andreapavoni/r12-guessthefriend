@@ -7,6 +7,7 @@ class Game < ActiveRecord::Base
 
   serialize :target
   serialize :guesses
+  serialize :hints
 
   def self.by_token(token)
     where(token: token).first
@@ -25,6 +26,8 @@ class Game < ActiveRecord::Base
       # Guesses
       g.guesses = user.friends(limit: 23, except: g.target['id']).shuffle!
 
+      g.hints = Friend.new(User.find(user.id), g.target['id']).hints
+
       g.save!
     end
   end
@@ -37,17 +40,15 @@ class Game < ActiveRecord::Base
     self.target['id']
   end
 
-  # TODO REMOVE ME - hints must be generated in Game.make and serialized to
-  # the database.
-  def hints
-    Friend.new(User.find(user_id), target['id']).hints
-  end
-
-  # TODO - do not return a random hint, rather use the stored
-  # current_hint_index to return the next one, and increment it,
+  # use the stored current_hint to return the next one, and increment it,
   # wrapping after it reaches hints.size.
   #
   def next_hint
-    hints.sample
+    transaction do
+      idx = self.current_hint
+      update_attribute(:current_hint, (idx += 1) == hints.size ? 0 : idx)
+    end
+
+    hints[current_hint]
   end
 end
