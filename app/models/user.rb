@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
 
       filter = lambda {|u| u['name'] != 'Facebook User' }
 
-      friends = facebook.get_connections('me', 'statuses').inject(Hash.new(0)) do |friends, status|
+      friends = facebook.get_connections(:me, :statuses).inject(Hash.new(0)) do |friends, status|
         if status['likes'].present?
           status['likes']['data'].each {|u| friends[u['id']] += 1 if filter.call(u) }
         end
