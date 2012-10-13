@@ -72,7 +72,9 @@ class User < ActiveRecord::Base
         friends
       end
 
-      friends.sort_by(&:last).map!(&:first).reverse!
+      friends = friends.sort_by(&:last)
+      friends.delete(self.uid)
+      friends.map!(&:first).reverse!
     end
   end
 
