@@ -1,7 +1,7 @@
 facebook_keys: &facebook
   facebook:
-    app_id: 1234
-    secret: 4567
+    app_id: '451465298229683'
+    secret: 'dc9a7a789a9924ac8d30251351eb24e5'
 
 development:
   <<: *facebook
