@@ -27,25 +27,28 @@ class User < ActiveRecord::Base
   # guess. We use the user's last status updates' likes and comments, as
   # this is an indication of recent activity with those users.
   #
-  # Returns an Array of user IDs to pick from.
+  # Returns an Array of user IDs to pick from, sorted by frequency they
+  # interacted with the current user.
   #
   def possibly_close_friends
     Rails.cache.fetch("user/#{uid}/close_friends", :expires_in => 600, :race_condition_ttl => 5) do
-      facebook.get_connections('me', 'statuses').inject(Set.new) do |friends, status|
+      friends = facebook.get_connections('me', 'statuses').inject(Hash.new(0)) do |friends, status|
         if status['likes'].present?
-          status['likes']['data'].each {|l| friends.add l['id']}
+          status['likes']['data'].each {|l| friends[l['id']] += 1}
         end
 
         if status['comments'].present?
-          status['comments']['data'].each {|c| friends.add c['from']['id']}
+          status['comments']['data'].each {|c| friends[c['from']['id']] += 1}
         end
 
         if status['tags'].present?
-          status['tags']['data'].each {|c| friends.add c['id']}
+          status['tags']['data'].each {|c| friends[c['id']] += 1}
         end
 
-        friends.to_a
+        friends
       end
+
+      friends.sort_by(&:last).map!(&:first).reverse!
     end
   end
 end
