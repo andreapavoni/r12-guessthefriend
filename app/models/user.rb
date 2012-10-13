@@ -38,6 +38,10 @@ class User < ActiveRecord::Base
     facebook.fql_query("select id, name, pic from profile where id = #{id}").first
   end
 
+  def random_close_friend
+    Friend.new(self, possibly_close_friends.sample)
+  end
+
   # Get a list of possibly close friends from which we'll pick the one to
   # guess. We use the user's last status updates' likes and comments, as
   # this is an indication of recent activity with those users.
