@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   #
   # Returns an Hash in the same format returned by +friends+.
   def friend(id)
-    facebook.fql_query("select id, name, pic from profile where id = #{id}")
+    facebook.fql_query("select id, name, pic from profile where id = #{id}").first
   end
 
   # Get a list of possibly close friends from which we'll pick the one to
