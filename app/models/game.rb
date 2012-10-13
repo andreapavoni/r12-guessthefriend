@@ -9,27 +9,29 @@ class Game < ActiveRecord::Base
   serialize :guesses
   serialize :hints
 
-  def self.by_token(token)
-    where(token: token).first
-  end
+  class << self
+    def by_token(token)
+      where(token: token).first
+    end
 
-  def self.make(user, token)
-    new.tap do |g|
-      g.token = token
+    def make(user, token)
+      new.tap do |g|
+        g.token = token
 
-      # Gamer
-      g.user_id = user.id
+        # Gamer
+        g.user_id = user.id
 
-      # Target
-      g.target = user.suitable_close_friend.to_h
+        # Target
+        g.target = user.suitable_close_friend.to_h
 
-      # Guesses
-      g.guesses = user.friends(limit: 23, except: g.target['id']).shuffle!
+        # Guesses
+        g.guesses = user.friends(limit: 23, except: g.target['id']).shuffle!
 
-      # Hints
-      g.hints = Friend.new(User.find(user.id), g.target['id']).hints
+        # Hints
+        g.hints = Friend.new(User.find(user.id), g.target['id']).hints
 
-      g.save!
+        g.save!
+      end
     end
   end
 
@@ -41,9 +43,10 @@ class Game < ActiveRecord::Base
     self.target['id']
   end
 
-  # use the stored current_hint to return the next one, and increment it,
+  # Use the stored current_hint to return the next one, and increment it,
   # wrapping after it reaches hints.size.
   #
+  # Returns a String representing the current hint
   def next_hint
     transaction do
       idx = self.current_hint
@@ -51,5 +54,13 @@ class Game < ActiveRecord::Base
     end
 
     hints[current_hint]
+  end
+
+  # Updates score for the current game
+  def update_score!(points=1)
+    transaction do
+      self.increment!(:score, points)
+      self
+    end
   end
 end
