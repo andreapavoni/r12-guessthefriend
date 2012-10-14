@@ -5,9 +5,9 @@ class Game < ActiveRecord::Base
 
   attr_accessible :hints
 
-  serialize :target
-  serialize :guesses
-  serialize :hints
+  serialize :target,  JSON
+  serialize :guesses, JSON
+  serialize :hints,   JSON
 
   class << self
     def by_token(token)
