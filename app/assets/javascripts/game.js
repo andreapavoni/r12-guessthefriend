@@ -10,7 +10,9 @@ $(function () {
   var hint = $('#hint');
   var roll = $('#next-hint');
 
-  roll.click (function () {
+  roll.click (function (event) {
+    event.preventDefault ();
+
     var elem = $(this);
 
     $.ajax ({
@@ -60,7 +62,9 @@ $(function () {
   //
   var root = $('body');
   var people = $('.friend');
-  people.click (function () {
+  people.click (function (event) {
+    event.preventDefault ();
+
     var person = $(this);
     $.ajax ({
       url: person.data ('url'),
@@ -126,7 +130,9 @@ $(function () {
   // Router
   //
   var restart = $('#new-game');
-  restart.click (function () {
+  restart.click (function (event) {
+    event.preventDefault ();
+
     if (confirm ('Sure, pal?')) {
       $.ajax ({
         url      : go.to ('#reveal-url'),
@@ -167,7 +173,9 @@ $(function () {
     var label  = button.find ('.text');
     var orig   = label.text ();
 
-    button.click (function () {
+    button.click (function (event) {
+      event.preventDefault ();
+
       if ($mode == 'MODE_ELIMINATE') {
         $mode = 'MODE_GUESS';
         button.addClass ('active');
