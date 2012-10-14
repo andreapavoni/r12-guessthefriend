@@ -60,23 +60,23 @@ $(function () {
 
   // API Client
   //
-  var root = $('body');
-  var people = $('.friend');
-  $('.friends').on ('click', '.friend', function (event) {
+  var people = $('.friend'), friends = $('.friends');
+  friends.on ('click', '.friend', function (event) {
     event.preventDefault ();
 
     var person = $(this);
     $.ajax ({
-      url: person.data ('url'),
-      data: { id: person.data ('id') },
+      url: friends.data ($mode == 'MODE_ELIMINATE' ? 'eliminate-url' : 'guess-url'),
+
+      data: { id: person.attr ('id') },
 
       statusCode: {
-        200: function () {
-          $(root).trigger ('guesswho:excluded', [person]);
+        200: function (score) {
+          friends.trigger ('guesswho:success', [person, score]);
         },
 
-        418: function () { // YOU'RE A TEAPOT
-          $(root).trigger ('guesswho:guessed', [person]);
+        418: function (score) { // YOU'RE A TEAPOT
+          friends.trigger ('guesswho:failed', [person, score]);
         },
 
         500: oh_so_sorry
@@ -84,8 +84,8 @@ $(function () {
     });
   });
 
-  $(root).bind({
-    'guesswho:excluded': function (event, person) {
+  $(friends).bind({
+    'guesswho:success': function (event, person, score) {
       switch($mode) {
       case 'MODE_ELIMINATE':
         // OK, hide the wrong one
@@ -93,6 +93,20 @@ $(function () {
           if (people.filter (':visible').length == 1)
             you_win ();
         });
+        break;
+
+      case 'MODE_GUESS':
+        you_win ();
+        break;
+      }
+    },
+
+    'guesswho:failed': function (event, person, score) {
+      switch($mode) {
+      case 'MODE_ELIMINATE':
+        // Hide everyone except this one, that is the correct one.
+        //
+        you_lose ({reveal: person.attr ('id')});
         break;
 
       case 'MODE_GUESS':
@@ -107,21 +121,6 @@ $(function () {
             you_lose ({reveal: id});
           }
         });
-
-        break;
-      }
-    },
-
-    'guesswho:guessed': function (event, person) {
-      switch($mode) {
-      case 'MODE_ELIMINATE':
-        // Hide everyone except this one, that is the correct one.
-        //
-        you_lose ({reveal: person.attr ('id')});
-        break;
-
-      case 'MODE_GUESS':
-        you_win ();
         break;
       }
     }
