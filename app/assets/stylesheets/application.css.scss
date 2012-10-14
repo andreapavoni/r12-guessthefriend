@@ -51,6 +51,14 @@ a, a:visited {
     padding-top: 4px;
     color: $white;
 
+    a {
+      text-decoration: none;
+
+      &:hover > span {
+        text-decoration: underline;
+      }
+    }
+
     img {
       height: 32px;
       margin-top: -8px;
