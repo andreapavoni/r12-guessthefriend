@@ -5,7 +5,7 @@ class Friend
 
   AvailableHints = {
     gender: "Is a",
-    birthday: "Is born in",
+    birthday: "Was born in",
     hometown: "Lives in",
     favorite_athletes: "Is a fan of",
     bio: "His/Her bio talks about",
@@ -61,7 +61,7 @@ class Friend
     if suitable?
       AvailableHints.keys.select {|a| send(a).present?}.each do |hint|
         Array.wrap(send(hint)).each do |assertion|
-          assertions << "#{AvailableHints[hint]} '#{assertion}'"
+          assertions << "#{AvailableHints[hint]} '#{assertion}'."
         end
       end
     end
