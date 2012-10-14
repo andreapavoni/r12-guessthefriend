@@ -165,23 +165,29 @@ $(function () {
 
   // Mode switcher
   //
-  game.on ('click', '#i-got-it', function (event) {
-    var button = $(this);
-    var label  = button.find ('.text');
-    var orig   = label.text ();
+  (function () {
+    var label, orig;
 
-    event.preventDefault ();
+    game.on ('click', '#i-got-it', function (event) {
+      if (!game.switcher) {
+        game.switcher = $(this);
+        label = game.switcher.find ('.text');
+        orig  = label.text ();
+      }
 
-    if (game.mode == 'MODE_ELIMINATE') {
-      game.mode = 'MODE_GUESS';
-      button.addClass ('active');
-      game.removeClass ('eliminating').addClass ('guessing');
-      label.text ('Ok, make your guess!');
-    } else {
-      game.mode = 'MODE_ELIMINATE';
-      button.removeClass ('active');
-      game.removeClass ('guessing').addClass ('eliminating');
-      label.text (orig);
-    }
-  });
+      event.preventDefault ();
+
+      if (game.mode == 'MODE_ELIMINATE') {
+        game.mode = 'MODE_GUESS';
+        game.switcher.addClass ('active');
+        game.removeClass ('eliminating').addClass ('guessing');
+        label.text ('Ok, make your guess!');
+      } else {
+        game.mode = 'MODE_ELIMINATE';
+        game.switcher.removeClass ('active');
+        game.removeClass ('guessing').addClass ('eliminating');
+        label.text (orig);
+      }
+    });
+  })();
 });
