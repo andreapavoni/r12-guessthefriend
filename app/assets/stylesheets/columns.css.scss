@@ -1,3 +1,9 @@
+.grid:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 [class*='col-'] {
   float: left;
 }
@@ -19,5 +25,13 @@
 
 .col-1-3, .col-2-3, .col-3-3 {
   width: 33.3%;
+}
+
+.grid-pad {
+  padding: 20px 0 20px 20px;
+}
+
+.grid-pad > [class*='col-']:last-of-type {
+  padding-right: 20px;
 }
 

@@ -1,17 +1,19 @@
 <div class="home clearfix">
 
-  <div class="col-1-2">
-    <h1>Can you guess who is the misterious friend?</h1>
-    <p>We are ready to make a bet with you.</p>
-    <p>We'll show you a random bunch of your facebook friends,</p>
-    <p>and we'll give you some hints about one amongst them.</p>
-    <p>After every hint we'll allow you to discard those that don't match.</p>
-    <p>How many times will you able to guess the misterious friend?</p>
-    <p>We bet you'll be surprised to know how many things you don't know about your friends!</p>
-  </div>
+  <div class="grid grid-pad">
+    <div class="col-1-2">
+      <h1>Can you guess who is the misterious friend?</h1>
+      <p>We are ready to make a bet with you.</p>
+      <p>We'll show you a random bunch of your facebook friends,</p>
+      <p>and we'll give you some hints about one amongst them.</p>
+      <p>After every hint we'll allow you to discard those that don't match.</p>
+      <p>How many times will you able to guess the misterious friend?</p>
+      <p>We bet you'll be surprised to know how many things you don't know about your friends!</p>
+    </div>
 
-  <div class="col-2-2">
-    <iframe src="http://player.vimeo.com/video/1193166?title=1&amp;byline=1&amp;portrait=1" width="500" height="377" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></p>
+    <div class="col-2-2">
+      <iframe src="http://player.vimeo.com/video/1193166?title=1&amp;byline=1&amp;portrait=1" width="500" height="377" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></p>
+    </div>
   </div>
 
   <% if !current_user %>
@@ -29,60 +31,61 @@
     </div>
   <% end %>
 
-  <div class="col-1-3 team">
-    <h2>Team</h2>
-    <div>
-      <div class="avatar" style="background-image: url('https://twimg0-a.akamaihd.net/profile_images/1721433187/new_avatar.png');"></div>
-      <h3>Andrea Pavoni</h3>
-      <p>ruby &amp; rails developer, freelance, *nix lover, teacher</br>
-      Rome, Italy · http://andreapavoni.com
+  <div class="grid grid-pad">
+    <div class="col-1-3 team">
+      <h2>Team</h2>
+      <div>
+        <div class="avatar" style="background-image: url('https://twimg0-a.akamaihd.net/profile_images/1721433187/new_avatar.png');"></div>
+        <h3>Andrea Pavoni</h3>
+        <p>ruby &amp; rails developer, freelance, *nix lover, teacher</br>
+        Rome, Italy · http://andreapavoni.com
+        </p>
+      </div>
+
+      <div>
+        <div class="avatar" style="background-image: url('https://twimg0-a.akamaihd.net/profile_images/1929189543/Me_-_1c.jpg');"></div>
+        <h3>Claudio Floreani</h3>
+        <p>21st century digital boy. http://segmentation-fault.core-dumped.info/<br/>
+      United States of the Internet · http://flavors.me/vjt
+        </p>
+      </div>
+
+      <div>
+        <div class="avatar" style="background-image: url('https://twimg0-a.akamaihd.net/profile_images/1578270435/cubavatar.jpg');"></div>
+        <h3>Marcello Barnaba</h3>
+        <p>Gli angeli possono volare perché si prendono alla leggera - G. K. Chesterton, Orthodoxy<br/>
+        Milan, Italy · http://about.me/ClaudioFloreani
+        </p>
+      </div>
+
+      <div>
+        <div class="avatar" style="background-image: url('https://twimg0-a.akamaihd.net/profile_images/2478768484/525bbtott57l8jo5845j.jpeg');"></div>
+        <h3>Alessandro Vendruscolo</h3>
+        <p>Graphic designer / front-end developer / Apple geek / Computer Science graduate / Chocolate lover / Dreamer //<br/>
+        Padova | ITALY · http://avedesign.me
+        </p>
+      </div>
+    </div>
+
+    <div class="col-2-3 rails48">
+      <h3>48rails challenge</h3>
+      <p>
+      48 rails  is an event organized by  Programmers in Padua, the developers community of Padova, to participate in the RailsRaumble 2012
       </p>
     </div>
 
-    <div>
-      <div class="avatar" style="background-image: url('https://twimg0-a.akamaihd.net/profile_images/1929189543/Me_-_1c.jpg');"></div>
-      <h3>Claudio Floreani</h3>
-      <p>21st century digital boy. http://segmentation-fault.core-dumped.info/<br/>
-    United States of the Internet · http://flavors.me/vjt
-      </p>
-    </div>
-
-    <div>
-      <div class="avatar" style="background-image: url('https://twimg0-a.akamaihd.net/profile_images/1578270435/cubavatar.jpg');"></div>
-      <h3>Marcello Barnaba</h3>
-      <p>Gli angeli possono volare perché si prendono alla leggera - G. K. Chesterton, Orthodoxy<br/>
-      Milan, Italy · http://about.me/ClaudioFloreani
-      </p>
-    </div>
-
-    <div>
-      <div class="avatar" style="background-image: url('https://twimg0-a.akamaihd.net/profile_images/2478768484/525bbtott57l8jo5845j.jpeg');"></div>
-      <h3>Alessandro Vendruscolo</h3>
-      <p>Graphic designer / front-end developer / Apple geek / Computer Science graduate / Chocolate lover / Dreamer //<br/>
-      Padova | ITALY · http://avedesign.me
-      </p>
+    <div class="col-3-3 leaderbord">
+      <h3>Leaderboard</h3>
+      <ul>
+        <% @players.each do |player| %>
+          <li>
+            <%= image_tag profile_pic_for(player.uid, player.oauth_token), alt: player.name, size: '48x48' %>
+            <%= player.name %>,
+            <%= player.score %> points.
+          </li>
+        <% end %>
+      </ul>
     </div>
   </div>
-
-  <div class="col-2-3 rails48">
-    <h3>48rails challenge</h3>
-    <p>
-    48 rails  is an event organized by  Programmers in Padua, the developers community of Padova, to participate in the RailsRaumble 2012
-    </p>
-  </div>
-
-  <div class="col-3-3 leaderbord">
-    <h3>Leaderboard</h3>
-    <ul>
-      <% @players.each do |player| %>
-        <li>
-          <%= image_tag profile_pic_for(player.uid, player.oauth_token), alt: player.name, size: '48x48' %>
-          <%= player.name %>,
-          <%= player.score %> points.
-        </li>
-      <% end %>
-    </ul>
-  </div>
-
 </div>
 
