@@ -79,6 +79,17 @@ $(function () {
 
         if (options.open)
           options.open.apply (this, [container]);
+
+        if (options.profile) {
+          var name = $('#'+options.profile).find ('.name .text').text ();
+          var box  = $('#profile-link');
+          var link = box.find ('a');
+
+          link.attr ('href', link.attr ('href') + options.profile);
+          link.text (name);
+
+          container.append ('<br/>').append (box.html ());
+        }
       }
     });
   };
@@ -93,8 +104,9 @@ $(function () {
 
           setTimeout (function () { // FIXME use AnimationEnd event
             dialog ('#lose-dialog', {
-              score: options.score,
-              open : function (container) {
+              score  : options.score,
+              profile: options.reveal,
+              open   : function (container) {
                 container.find (
                   options.score == 0 ? '.no-points' : '.points'
                 ).show ();
@@ -115,7 +127,8 @@ $(function () {
     });
 
     dialog ('#win-dialog', {
-      score: options.score
+      score:   options.score,
+      profile: options.reveal
     });
   };
 
