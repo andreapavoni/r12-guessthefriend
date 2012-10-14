@@ -61,7 +61,7 @@ class Friend
     if suitable?
       AvailableHints.keys.select {|a| send(a).present?}.each do |hint|
         assertion = send(hint)
-        assertions << "#{AvailableHints[hint]} #{assertion.respond_to?(:sample) ? assertion.sample : assertion }"
+        assertions << "#{AvailableHints[hint]} '#{assertion.respond_to?(:sample) ? assertion.sample : assertion }'"
       end
     end
     assertions.shuffle
