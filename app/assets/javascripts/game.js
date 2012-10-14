@@ -50,17 +50,45 @@ $(function () {
     });
   }) ();
 
+  var dialog = function (selector, options) {
+    var container = $(selector);
+
+    container.dialog ({
+      width     : 400,
+      height    : 180,
+      modal     : true,
+      resizable : false,
+      draggable : false,
+      title     : container.find ('.title').text (),
+      buttons   : {
+        'Close': function () {
+          go.abandon ();
+        },
+        'Play again!': function () {
+          go.restart ();
+        }
+      },
+
+      open: function () {
+        container.find ('.score').text (options.score);
+
+        if (options.open)
+          options.open.apply (this, [container]);
+      }
+    });
+  };
+
   var you_lose = function (options) {
     reveal (options.reveal);
 
-    setTimeout (function () {
-      alert ('YOO L0SE! You scored '+options.score+' points, anyway');
-
-      if (confirm ('Wanna play again?'))
-        go.restart ();
-      else
-        go.abandon ();
-    }, 1000);
+    dialog ('#lose-dialog', {
+      score: options.score,
+      open : function (container) {
+        container.find (
+          options.score == 0 ? '.no-points' : '.points'
+        ).show ();
+      }
+    });
   };
 
   var you_win = function (options) {
@@ -69,12 +97,9 @@ $(function () {
       url : go.to ('won')
     });
 
-    alert ('FOR THE WIN!!!11 You scored '+options.score+' points on this game!');
-
-    if (confirm ('Wanna play again?'))
-      go.restart ();
-    else
-      go.abandon ();
+    dialog ('#win-dialog', {
+      score: options.score
+    });
   };
 
 
