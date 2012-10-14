@@ -54,6 +54,8 @@ $(function () {
 
     if (confirm ('Wanna play again?'))
       go.restart ();
+    else
+      go.abandon ();
   };
 
 
