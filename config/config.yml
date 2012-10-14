@@ -1,3 +1,6 @@
+app_domain: &app_domain
+  host:
+
 facebook_keys: &facebook
   facebook:
     app_id: '451465298229683'
@@ -9,6 +12,7 @@ google_analytics: &google_analytics
 development:
   <<: *facebook
   <<: *google_analytics
+  host: 'dev.r12.railsrumble.com:3000'
 
 test:
   <<: *facebook
@@ -17,3 +21,4 @@ test:
 production:
   <<: *facebook
   <<: *google_analytics
+  host: 'arrr.r12.railsrumble.com'
