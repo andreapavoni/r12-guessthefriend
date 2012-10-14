@@ -21,6 +21,7 @@ body {
   max-width: 1024px;
   margin: 0 auto;
   background-image: url('/assets/background.png');
+  background-color: $background-color;
   font-family: "Myriad Pro", "Helvetica", sans-serif;
   color: $dark-text-color;
 }
