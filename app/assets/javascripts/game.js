@@ -179,7 +179,7 @@ $(function () {
       if ($mode == 'MODE_ELIMINATE') {
         $mode = 'MODE_GUESS';
         button.addClass ('active');
-        label.text ('GUESSING...');
+        label.text ('Ok, make your guess!');
       } else {
         $mode = 'MODE_ELIMINATE';
         button.removeClass ('active');
