@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   # information to build enough hints to play the game.
   #
   def suitable_close_friend
-    choices = possibly_close_friends.shuffle
+    choices = friends_sample.shuffle
     loop do
       friend = Friend.new(self, choices.shift)
       return friend if friend.suitable?
@@ -57,15 +57,15 @@ class User < ActiveRecord::Base
 
   # Get a list of possibly close friends from which we'll pick the one to
   # guess. We use the user's last status updates' likes and comments, as
-  # this is an indication of recent activity with those users.
+  # this is an indication of recent activity with those users. To make
+  # the game more interesting, it also picks a random set of friends.
   #
-  # Returns an Array of user IDs to pick from, sorted by frequency they
-  # interacted with the current user.
+  # Returns an Array of Facebook user IDs.
   #
-  def possibly_close_friends
-    Rails.cache.fetch("user/#{uid}/close_friends", :expires_in => 600, :race_condition_ttl => 5) do
+  def friends_sample
+    Rails.cache.fetch("user/#{uid}/friends_sample", :expires_in => 300, :race_condition_ttl => 5) do
 
-      filter = lambda {|u| u['name'] != 'Facebook User' }
+      filter = lambda {|u| u.present? && u['name'] != 'Facebook User' }
 
       friends = facebook.get_connections(:me, :statuses).inject(Hash.new(0)) do |friends, status|
         if status['likes'].present?
@@ -83,9 +83,14 @@ class User < ActiveRecord::Base
         friends
       end
 
-      friends = friends.sort_by(&:last)
-      friends.delete(self.uid)
-      friends.map!(&:first).reverse!
+      close_friends = friends.keys
+      close_friends.delete(self.uid)
+
+      other_friends = facebook.get_connections('me', 'friends', :fields => 'id')
+      other_friends.map! {|x| x['id']}.shuffle!
+
+      close_friends + other_friends.take(10)
+
     end
   end
 
