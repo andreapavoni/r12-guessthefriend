@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:og="http://ogp.me/ns#" xmlns:fb="https://www.facebook.com/2008/fbml">
 <head>
   <title>Guesswho</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <%= add_social :google_analytics %>
+
+  <meta property="og:site_name" content="Guess the Friend!" />
+  <meta property="og:description" content="Let's make a bet: we give you some pieces of information from one of your friends, will you be able to identify who we picked in less than 10 clicks?" />
+  <meta property="og:title" content="How well do you know your friends?" />
+  <meta property="og:type" content="game" />
+  <meta property="og:url" content="http://arrr.r12.railsrumble.com/" />
+  <meta property="fb:app_id" content="451465298229683" />
 </head>
 <body>
   <%= add_social :hellobar %>
