@@ -13,4 +13,5 @@ Guesswho::Application.routes.draw do
   get '/g/abandon', to: 'site#abandon',   as: :abandon
   get '/g/restart', to: 'site#restart',   as: :restart
   get '/g/next',    to: 'site#hint',      as: :next_hint
+  get '/g/epicfail',to: 'site#reveal',    as: :reveal
 end

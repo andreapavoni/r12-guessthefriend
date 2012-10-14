@@ -52,6 +52,14 @@ class SiteController < ApplicationController
     end
   end
 
+  # Reveals who is the mysterious friend to guess. This sucks, as
+  # is the only endpoint you can use to hack the app, but it is needed
+  # to make the "I Got It" mode display who was the mysterious friend
+  # after you chose the wrong one. Gotcha!
+  def reveal
+    render :json => @game.target_id
+  end
+
   private
   def find_game
     @game = Game.by_token(current_game)

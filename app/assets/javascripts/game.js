@@ -29,13 +29,17 @@ $(function () {
   /* Elimination core */
   var $mode = 'MODE_ELIMINATE';
 
-  var you_lose = function () {
-    alert ('YOO L0SE!');
+  var you_lose = function (options) {
+    reveal (options.reveal);
 
-    if (confirm ('Wanna play again?'))
-      go.restart ();
-    else
-      go.abandon ();
+    setTimeout (function () {
+      alert ('YOO L0SE!');
+
+      if (confirm ('Wanna play again?'))
+        go.restart ();
+      else
+        go.abandon ();
+    }, 1000);
   };
 
   var you_win = function () {
@@ -46,8 +50,15 @@ $(function () {
   };
 
 
-  var root = $('body');
+  // Reveals the mysterious friend
+  //
+  var reveal = function (id) {
+    people.filter (':not([id='+id+'])').fadeOut ();
+  }
 
+  // API Client
+  //
+  var root = $('body');
   var people = $('.friend');
   people.click (function () {
     var person = $(this);
@@ -82,8 +93,17 @@ $(function () {
 
       case 'MODE_GUESS':
         // Oh no, you guessed the wrong one ;-)
-        //
-        you_lose ();
+        // Reveal the right one and fail.
+        $.ajax ({
+          url      : go.to ('#reveal-url'),
+          dataType : 'text',
+          sync     : true,
+          error    : oh_so_sorry,
+          success  : function (id) {
+            you_lose ({reveal: id});
+          }
+        });
+
         break;
       }
     },
@@ -93,8 +113,7 @@ $(function () {
       case 'MODE_ELIMINATE':
         // Hide everyone except this one, that is the correct one.
         //
-        people.filter (':not([id='+person.attr('id')+'])').fadeOut ();
-        you_lose ();
+        you_lose ({reveal: person.attr ('id')});
         break;
 
       case 'MODE_GUESS':
@@ -104,6 +123,8 @@ $(function () {
     }
   });
 
+  // Router
+  //
   var restart = $('#new-game');
   restart.click (function () {
     if (confirm ('Sure, pal?'))
@@ -120,11 +141,17 @@ $(function () {
     },
 
     go: function (elem) {
-      window.location.href = $(elem).val ();
+      window.location.href = this.to (elem);
+    },
+
+    to: function (elem) {
+      return $(elem).val ();
     }
   };
 
 
+  // Mode switcher
+  //
   var i_got_it = $('#i-got-it');
   i_got_it.click (function () {
     if ($mode == 'MODE_ELIMINATE') {
