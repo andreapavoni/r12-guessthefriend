@@ -4,12 +4,13 @@ class SiteController < ApplicationController
   before_filter :ensure_game,       only:   [:guess, :eliminate, :won]
   before_filter :find_guess,        only:   [:guess, :eliminate]
 
-  rescue_from Koala::Facebook::APIError, OAuth2::Error do |exception|
+  rescue_from Koala::Facebook::APIError, OAuth2::Error,
+    OmniAuth::Strategies::OAuth2::CallbackError do |exception|
     notify_exception exception
 
-    if exception.kind_of?(OAuth2::Error) || (
-      exception.respond_to?(:fb_error_code) &&
-      exception.fb_error_code.to_i == 190)
+    if exception.kind_of?(OAuth2::Error) ||
+       exception.kind_of?(OmniAuth::Strategies::OAuth2::CallbackError) ||
+      (exception.respond_to?(:fb_error_code) && exception.fb_error_code.to_i == 190)
 
       new_game!
       self.current_user = nil
@@ -31,6 +32,7 @@ class SiteController < ApplicationController
   # resumes the last played game.
   #
   def play
+    raise OmniAuth::Strategies::OAuth2::CallbackError.new("foo")
     @friends = gather_friends_from(@game) if @game
   end
 

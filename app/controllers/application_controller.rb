@@ -4,7 +4,9 @@ class ApplicationController < ActionController::Base
   def notify_exception(exception)
     if defined? ExceptionNotifier::Notifier
       ExceptionNotifier::Notifier.exception_notification(
-        request.env, exception).deliver
+        request.env, exception,
+        data: {message: 'Exception was caught'}
+      ).deliver
     end
   end
 
