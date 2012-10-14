@@ -152,16 +152,21 @@ $(function () {
 
   // Mode switcher
   //
-  var i_got_it = $('#i-got-it');
-  i_got_it.click (function () {
-    if ($mode == 'MODE_ELIMINATE') {
-      $mode = 'MODE_GUESS';
-      i_got_it.addClass ('active');
-      i_got_it.val ('GUESSING...');
-    } else {
-      $mode = 'MODE_ELIMINATE';
-      i_got_it.removeClass ('active');
-      i_got_it.val ('I got it!');
-    }
-  });
+  (function () {
+    var button = $('#i-got-it');
+    var label  = button.find ('.text');
+    var orig   = label.text ();
+
+    button.click (function () {
+      if ($mode == 'MODE_ELIMINATE') {
+        $mode = 'MODE_GUESS';
+        button.addClass ('active');
+        label.text ('GUESSING...');
+      } else {
+        $mode = 'MODE_ELIMINATE';
+        button.removeClass ('active');
+        label.text (orig);
+      }
+    });
+  })();
 });
