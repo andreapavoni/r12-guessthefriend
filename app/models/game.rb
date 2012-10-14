@@ -33,6 +33,11 @@ class Game < ActiveRecord::Base
         g.save!
       end
     end
+
+    # Find the Users ordered by their score
+    def leaderboard
+      self.joins(:user).select('SUM(score) AS score, users.name').group('users.name').order('sum(score) desc')
+    end
   end
 
   def people
