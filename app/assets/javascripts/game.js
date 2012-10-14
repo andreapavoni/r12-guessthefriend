@@ -62,7 +62,7 @@ $(function () {
   //
   var root = $('body');
   var people = $('.friend');
-  people.click (function (event) {
+  $('.friends').on ('click', '.friend', function (event) {
     event.preventDefault ();
 
     var person = $(this);
