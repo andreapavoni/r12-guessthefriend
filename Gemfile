@@ -20,6 +20,7 @@ end
 gem 'jquery-rails'
 gem 'omniauth-facebook'
 gem 'koala', '~> 1.5.0'
+gem 'yajl-ruby', require: 'yajl/json_gem'
 
 group :development do
   gem 'capistrano'
