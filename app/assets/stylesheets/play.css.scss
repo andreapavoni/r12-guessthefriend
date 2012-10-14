@@ -32,8 +32,28 @@
     text-align: left;
 
     > h1 {
+      display: inline-block;
       font-size: 36px;
       margin: 0;
+    }
+
+    > .how-to {
+      display: inline-block;
+      margin-left: 10px;
+
+      &, &:visited {
+        color: $base-color;
+      }
+
+      &:hover ~ .popover-wrapper {
+        opacity: 1;
+      }
+    }
+
+    > .popover-wrapper {
+      display: inline-block;
+      margin-top: -20px;
+      margin-left: 15px;
     }
 
     > p {

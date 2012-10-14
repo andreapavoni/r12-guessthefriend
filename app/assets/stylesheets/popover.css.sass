@@ -1,0 +1,42 @@
+@import "colors.scss"
+
+.popover-wrapper
+  position: absolute
+  opacity: 0
+  transition: 0.4s ease-out
+
+  > .popover
+    width: auto
+    height: auto
+    margin: 0
+    padding: 7px
+    position: relative
+    border-radius: 7px
+    border: 1px solid $dark-text-color
+    box-shadow: rgba(#000, 0.5) 0 3px 10px 0
+    background-color: #fff
+    text-align: center
+    z-index: 3
+
+    > p
+      width: auto
+      display: inline
+      margin: 0
+      padding: 0
+      font-size: 14px
+      color: $dark-text-color
+      text-align: center
+
+  > .arrow
+    width: 15px
+    height: 15px
+    position: absolute
+    top: 50%
+    left: -7px
+    margin-top: -7px
+    border: 1px solid $dark-text-color
+    border-width: 0 0 1px 1px
+    transform: rotate(45deg)
+    z-index: 4
+    background-color: #fff
+

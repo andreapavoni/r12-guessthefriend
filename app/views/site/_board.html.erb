@@ -1,18 +1,26 @@
 <div class="grid grid-pad">
   <div class="col-1-2- hint">
-    <h1>Hint:</h1>
+    <h1>Hint: </h1>
+    <a href="#" class="how-to">(how do I play?)</a>
+
+    <div class="popover-wrapper">
+      <div class="arrow"></div>
+      <div class="arrow border"></div>
+      <div class="popover">
+        <p>
+          Eliminate unlikely matches by clicking on their photo.<br/>
+          You can ask for a new hint using the <strong>Next hint</strong> button.<br/>
+          For bonus points, identify the friend in advance using the <strong>I got it!</strong> button.<br/>
+
+          <strong>Have fun!</strong>
+        </p>
+      </div>
+    </div>
+
     <p id="hint"><%= @game.next_hint %></p>
+
   </div>
 
-  <div class="col-2-2">
-    <p class="help">
-      Eliminate unlikely matches by clicking on their photo.<br/>
-      You can ask for a new hint using the <strong>Next hint</strong> button.<br/>
-      For bonus points, identify the friend in advance using the <strong>I got it!</strong> button.<br/>
-
-      <strong>Have fun!</strong>
-    </p>
-  </div>
 </div>
 
 <div class="actions">
