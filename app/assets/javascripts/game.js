@@ -64,7 +64,7 @@ $(function () {
 
     container.dialog ({
       width        : 400,
-      height       : 220,
+      height       : 240,
       modal        : true,
       resizable    : false,
       draggable    : false,
@@ -112,7 +112,7 @@ $(function () {
                 ).show ();
               }
             });
-          }, 3000);
+          }, 1200);
         }
       }
     });
@@ -243,7 +243,7 @@ $(function () {
               reveal (id);
               setTimeout (function () {
                 dialog ('#another-try-dialog'); // CONVOLUTED
-              }, 3000);
+              }, 1200);
             }
           });
         },
