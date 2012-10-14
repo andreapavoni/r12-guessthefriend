@@ -37,13 +37,12 @@
       </div>
 
       <div class="navigation">
-        <a href="<%= leaderboard_path %>">Leaderboard</a>
-          <a href="http://guessthefriend.tumblr.com">Tumblr</a>
-          <div class="facebook-like"><%= add_social :facebook_like %></div>
-          <div class="tweet-count"><%= add_social :twitter_button %></div>
-          <div class="google-plus-count"><g:plusone></g:plusone></div>
-          <%# For the best performance, put this code immediately after the last +1 tag. %>
-          <%= add_social :google_plusone %>
+        <div class="facebook-like"><%= add_social :facebook_like %></div>
+        <div class="tweet-count"><%= add_social :twitter_button %></div>
+        <div class="g-plusone" data-size="medium" data-href="http://arrr.r12.railsrumble.com"></div>
+        <%# For the best performance, put this code immediately after the last +1 tag. %>
+        <%= add_social :google_plusone %>
+        <a href="http://guessthefriend.tumblr.com">Tumblr</a>
       </div>
     </div>
 
