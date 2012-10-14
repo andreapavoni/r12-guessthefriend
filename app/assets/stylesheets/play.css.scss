@@ -26,7 +26,8 @@
 
   .hint {
     width: 50%;
-    margin: 0 auto;
+    margin: 0;
+    display: inline-block;
     clear: left;
     text-align: left;
 
@@ -38,12 +39,21 @@
     > p {
       margin: 10px 0;
       font-size: 22px;
+      min-height: 80px;
 
       &.loading {
         opacity: 0.5;
       }
     }
 
+  }
+
+  .help {
+    width: 40%;
+    margin: 0;
+    font-style: italic;
+    display: inline-block;
+    color: #444;
   }
 
   .friends {
