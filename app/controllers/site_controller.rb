@@ -81,6 +81,8 @@ class SiteController < ApplicationController
   # friend's facebook wall.
   # We take care to not spam too much :-)
   def won
+    head :bad_request and return unless @game
+
     spam = Spam.for(@game.target_id)
 
     if spam.postable?
