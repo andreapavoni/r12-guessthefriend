@@ -54,6 +54,16 @@
     color: $dark-text-color;
   }
 
+  .actions {
+    margin: 0 auto;
+    text-align: center;
+
+    > .button {
+      margin: 0 15px;
+      display: inline-block;
+    }
+  }
+
   .friends {
     margin-top: 40px;
     padding-left: 35px;

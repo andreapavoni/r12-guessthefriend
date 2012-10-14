@@ -2,18 +2,6 @@
   <div class="col-1-2- hint">
     <h1>Hint:</h1>
     <p id="hint"><%= @game.next_hint %></p>
-
-    <a href="#" class="button blue size-medium" id="i-got-it">
-      <span class="text">I got it!</span>
-    </span>
-
-    <a href="#" class="button blue size-medium" id="new-game">
-      <span class="text">I give up</span>
-    </a>
-
-    <a href="#" class="button blue size-medium" id="next-hint" data-url="<%= next_hint_path %>" data-target="#hint">
-      <span class="text">Next hint</span>
-    </a>
   </div>
 
   <div class="col-2-2">
@@ -25,6 +13,20 @@
       <strong>Have fun!</strong>
     </p>
   </div>
+</div>
+
+<div class="actions">
+    <a href="#" class="button blue size-maxi" id="next-hint" data-url="<%= next_hint_path %>" data-target="#hint">
+      <span class="text">Next hint</span>
+    </a>
+
+    <a href="#" class="button green size-maxi" id="i-got-it">
+      <span class="text">I got it!</span>
+    </span>
+
+    <a href="#" class="button red size-maxi" id="new-game">
+      <span class="text">I give up</span>
+    </a>
 </div>
 
 <div class="friends clearfix">
