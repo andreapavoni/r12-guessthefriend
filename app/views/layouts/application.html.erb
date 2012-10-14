@@ -18,8 +18,14 @@
   <meta property="fb:app_id" content="451465298229683" />
 </head>
 <body>
-  <%= add_social :hellobar %>
-  <%= add_social :facebook_jssdk %>
+  <div class="hellobar">
+    <span class="rr12">RR12 - Vote for us!</span>
+    <% if current_user %>
+      <img src="<%= current_user.profile_pic %>" alt="" />
+      <a href="<%= signout_path %>" class="user-sinout"><%= current_user.name %>, signout</span>
+    <% end %>
+  </div>
+
 
   <div class="navigation">
     <div class="support-pages">
