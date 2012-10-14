@@ -77,6 +77,22 @@ class SiteController < ApplicationController
     render :json => @game.target_id
   end
 
+  # Get noticed that player won a game. So we post on
+  # friend's facebook wall.
+  # We take care to not spam too much :-)
+  def won
+    target_id = @game.target['id']
+    spam = Spam.where(target_id: target_id).first_or_create
+    msg = 'I guessed you on Guess The Friend, try to beat me!'
+
+    if spam.postable?
+      current_user.post_on_friend_wall(msg, target_id, root_url)
+      spam.save!
+    end
+
+    head(:no_content)
+  end
+
   def leaderboard
     @players = Game.leaderboard.limit(20)
   end
