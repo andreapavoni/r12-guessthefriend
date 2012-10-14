@@ -135,6 +135,10 @@ $(function () {
     event.preventDefault ();
 
     var person = $(this);
+
+    if (person.is ('.flipped'))
+      return;
+
     $.ajax ({
       url: game.data (game.mode == 'MODE_ELIMINATE' ? 'eliminate-url' : 'guess-url'),
 
