@@ -82,7 +82,14 @@ $(function () {
   };
 
   var you_lose = function (options) {
-    reveal (options.reveal);
+    dialog ('#wrong-dialog', {
+      buttons: {
+        'OK': function () {
+          $(this).dialog ('close');
+          reveal (options.reveal);
+        }
+      }
+    });
 
     setTimeout (function () { // FIXME use AnimationEnd event
       dialog ('#lose-dialog', {
