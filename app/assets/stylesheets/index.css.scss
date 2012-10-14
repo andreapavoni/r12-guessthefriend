@@ -1,7 +1,8 @@
+@import "colors.scss";
+
 .home {
   clear: left;
   margin-top: 40px;
-  color:#0b2f87;
 
   .signup, .play-game {
     margin: 40px auto;
@@ -11,8 +12,7 @@
   .description {
     > h1 {
       margin-top: 0;
-      color:#0b2f87;
-      font-size:30px;
+      font-size: 30px;
       font-weight:bold;
       text-align:center;
     }
@@ -45,15 +45,30 @@
 
   .team {
     > div {
+      margin-top: 15px;
+
       > .avatar {
         width: 48px;
         height: 48px;
+        margin-right: 10px;
         float: left;
         background-size: cover;
       }
 
       > h3 {
-        margin-left: 10px;
+        margin: 0 10px 0 0;
+        float: left;
+
+        a {
+          text-decoration: underline;
+
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+
+      > span {
         float: left;
       }
 
