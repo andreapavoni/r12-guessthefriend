@@ -38,6 +38,23 @@
 
   .rails-48 {}
 
-  .leaderbord {}
+  .leaderbord {
+    > ul {
+      padding: 0;
+
+      > li {
+        margin: 15px 0;
+        list-style: none;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
 }
 

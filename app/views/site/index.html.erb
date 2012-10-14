@@ -63,8 +63,8 @@
       <% @players.each do |player| %>
         <li>
           <%= image_tag profile_pic_for(player.uid, player.oauth_token), alt: player.name, size: '48x48' %>
-          <%= player.name %>
-          <%= player.score %>
+          <%= player.name %>,
+          <%= player.score %> points.
         </li>
       <% end %>
     </ul>
