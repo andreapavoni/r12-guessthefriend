@@ -35,7 +35,7 @@ $(function () {
     reveal (options.reveal);
 
     setTimeout (function () {
-      alert ('YOO L0SE!');
+      alert ('YOO L0SE! You scored '+options.score+' points, anyway');
 
       if (confirm ('Wanna play again?'))
         go.restart ();
@@ -44,8 +44,8 @@ $(function () {
     }, 1000);
   };
 
-  var you_win = function () {
-    alert ('FOR THE WIN!!!11');
+  var you_win = function (options) {
+    alert ('FOR THE WIN!!!11 You scored '+options.score+' points on this game!');
 
     if (confirm ('Wanna play again?'))
       go.restart ();
@@ -75,8 +75,8 @@ $(function () {
           friends.trigger ('guesswho:success', [person, score]);
         },
 
-        418: function (score) { // YOU'RE A TEAPOT
-          friends.trigger ('guesswho:failed', [person, score]);
+        418: function (jqXHR) { // YOU'RE A TEAPOT
+          friends.trigger ('guesswho:failed', [person, jqXHR.responseText]);
         },
 
         500: oh_so_sorry
@@ -91,12 +91,12 @@ $(function () {
         // OK, hide the wrong one
         person.fadeOut (function () {
           if (people.filter (':visible').length == 1)
-            you_win ();
+            you_win ({score: score});
         });
         break;
 
       case 'MODE_GUESS':
-        you_win ();
+        you_win ({score: score});
         break;
       }
     },
@@ -106,7 +106,7 @@ $(function () {
       case 'MODE_ELIMINATE':
         // Hide everyone except this one, that is the correct one.
         //
-        you_lose ({reveal: person.attr ('id')});
+        you_lose ({score: score, reveal: person.attr ('id')});
         break;
 
       case 'MODE_GUESS':
@@ -118,7 +118,7 @@ $(function () {
           sync     : true,
           error    : oh_so_sorry,
           success  : function (id) {
-            you_lose ({reveal: id});
+            you_lose ({score: score, reveal: id});
           }
         });
         break;
