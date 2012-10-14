@@ -96,8 +96,6 @@ class SiteController < ApplicationController
   # friend's facebook wall.
   # We take care to not spam too much :-)
   def won
-    head(:no_content) and return # DISABLE for now ;-)
-
     spam = Spam.for(@game.target_id)
 
     begin
