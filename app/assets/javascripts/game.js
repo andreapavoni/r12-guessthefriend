@@ -242,7 +242,7 @@ $(function () {
         game.mode = 'MODE_GUESS';
         game.switcher.addClass ('active');
         game.removeClass ('eliminating').addClass ('guessing');
-        label.text ('Ok, make your guess!');
+        label.text ('Who\'s it?');
       } else {
         game.mode = 'MODE_ELIMINATE';
         game.switcher.removeClass ('active');
