@@ -82,13 +82,13 @@ $(function () {
 
         if (options.profile) {
           var name = $('#'+options.profile).find ('.name .text').text ();
-          var box  = $('#profile-link');
-          var link = box.find ('a');
+          var link = $('#profile-link').detach ();
 
           link.attr ('href', link.attr ('href') + options.profile);
-          link.text (name);
+          link.text (name + link.text ());
+          link.show ();
 
-          container.append ('<br/>').append (box.html ());
+          container.append ('<br/>').append (link);
         }
       }
     });
