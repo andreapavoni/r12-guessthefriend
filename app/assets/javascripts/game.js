@@ -63,13 +63,15 @@ $(function () {
     };
 
     container.dialog ({
-      width     : 400,
-      height    : 180,
-      modal     : true,
-      resizable : false,
-      draggable : false,
-      title     : container.find ('.title').text (),
-      buttons   : buttons,
+      width        : 400,
+      height       : 220,
+      modal        : true,
+      resizable    : false,
+      draggable    : false,
+      closeOnEscape: false,
+      dialogClass  : 'noclose',
+      title        : container.find ('.title').text (),
+      buttons      : buttons,
 
       open: function () {
         if (options.score)

@@ -155,3 +155,7 @@ a, a:visited {
   }
 }
 
+/* jQuery UI dialog w/o close button */
+.noclose .ui-dialog-titlebar-close {
+  display: none;
+}
