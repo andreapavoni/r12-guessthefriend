@@ -46,6 +46,16 @@ body {
     float: left;
     padding-top: 4px;
     color: $white;
+
+    img {
+      height: 32px;
+      margin-top: -8px;
+    }
+
+    span {
+      display: inline-block;
+      margin-top: 7px;
+    }
   }
 
   .user {
