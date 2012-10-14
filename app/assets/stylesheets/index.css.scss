@@ -34,7 +34,25 @@
     text-align: center;
   }
 
-  .team {}
+  .team {
+    > div {
+      > .avatar {
+        width: 48px;
+        height: 48px;
+        float: left;
+        background-size: cover;
+      }
+
+      > h3 {
+        margin-left: 10px;
+        float: left;
+      }
+
+      > p {
+        clear: left;
+      }
+    }
+  }
 
   .rails-48 {}
 
