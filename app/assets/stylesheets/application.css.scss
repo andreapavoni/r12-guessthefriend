@@ -59,6 +59,25 @@ body {
   }
 }
 
+.navigation {
+  height: 30px;
+  margin-top: 35px;
+  padding: 5px;
+  float: right;
+  position: relative;
+  right: -5px;
+  background-color: $base-color;
+
+  > .facebook-like, > .tweet-count, > .g-plusone {
+    width: 100px;
+    float: left;
+  }
+
+  > .g-plusone {
+    width: 75px;
+  }
+}
+
 .content {
   max-width: 1024px;
   margin: 0 auto;
@@ -81,17 +100,6 @@ body {
     height: 101px;
     margin-left: 20px;
     background-image: url('/assets/logo.png');
-  }
-
-  .navigation {
-    float: right;
-    position: relative;
-    right: -5px;
-    background-color: $base-color;
-
-    .facebook-like, .tweet-count, .google-plus-count {
-      float: left;
-    }
   }
 }
 
