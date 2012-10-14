@@ -5,28 +5,24 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-  <%= google_analytics %>
+  <%= add_social :google_analytics %>
 </head>
 <body>
-  <script type="text/javascript" src="//www.hellobar.com/hellobar.js"></script>
-  <script type="text/javascript">
-    new HelloBar(55455,79320);
-  </script>
-
-  <%= facebook_jssdk %>
+  <%= add_social :hellobar %>
+  <%= add_social :facebook_jssdk %>
 
   <a href="/" class="logo ir">Guess the Friend!</a>
 
   <div class="social-share">
-    <div class="facebook-like"><%= facebook_like %></div>
-    <div class="tweet-count"><%= twitter_button %></div>
+    <div class="facebook-like"><%= add_social :facebook_like %></div>
+    <div class="tweet-count"><%= add_social :twitter_button %></div>
     <div class="google-plus-count"><g:plusone></g:plusone></div>
   </div>
 
   <%= yield %>
 
     <%# For the best performance, put this code immediately after the last +1 tag. %>
-    <%= google_plusone %>
+    <%= add_social :google_plusone %>
 
     <div class="footer">
       <p>Guess the Friend! was built in less that 48 hours during the <a href="http://railsrumble.com/">2012 edition of Rails Rumble</a>.</p>
