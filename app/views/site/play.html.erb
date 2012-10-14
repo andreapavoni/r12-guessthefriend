@@ -8,10 +8,10 @@
   <% if @game %>
     <%= render 'board' %>
   <% else %>
-    <h2 id="stalk" data-url="<%= make_game_path %>" data-target="#game">
-      Please be patient while we stalk your friends ... ;-)
-    </h2>
-    <!-- SPINNER PLEASE! :-D -->
+    <div id="stalk" data-url="<%= make_game_path %>" data-target="#game">
+      <h2>Please be patient, we're stalking your friends.</h2>
+      <div class="spinner"></div>
+    </div>
   <% end %>
 
 </div>

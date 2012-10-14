@@ -2,6 +2,27 @@
 
 .play {
 
+  #stalk {
+    width: 50%;
+    margin: 40px auto;
+    clear: left;
+
+    > h2 {
+      margin: 0;
+    }
+
+    > .spinner {
+      width: 42px;
+      height: 42px;
+      margin: 0 auto;
+      padding: 10px;
+      background-color: $background-color;
+      background-image: url('/assets/spinner.gif');
+      background-position: 10px 10px;
+      background-repeat: no-repeat;
+    }
+  }
+
   .hint {
     width: 50%;
     margin: 0 auto;
