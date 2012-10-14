@@ -70,6 +70,14 @@ $(function () {
 
       data: { id: person.attr ('id') },
 
+      beforeSend: function () {
+        person.addClass ('loading');
+      },
+
+      complete: function () {
+        person.removeClass ('loading');
+      },
+
       statusCode: {
         200: function (score) {
           game.trigger ('guesswho:success', [person, score]);
