@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
   def possibly_close_friends
     Rails.cache.fetch("user/#{uid}/close_friends", :expires_in => 600, :race_condition_ttl => 5) do
 
-      filter = lambda {|u| u['name'] != 'Facebook User' }
+      filter = lambda {|u| u.present? && u['name'] != 'Facebook User' }
 
       friends = facebook.get_connections(:me, :statuses).inject(Hash.new(0)) do |friends, status|
         if status['likes'].present?
