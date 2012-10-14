@@ -12,6 +12,12 @@ class SiteController < ApplicationController
   #
   def play
     @game = Game.make(current_user, current_game) unless @game
+
+  rescue Koala::Facebook::APIError
+    self.new_game!
+    self.current_user = nil
+
+    redirect_to root_path
   end
 
   # Returns the next hint for the current game as a JSON string.
