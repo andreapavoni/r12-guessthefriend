@@ -4,6 +4,24 @@ class SiteController < ApplicationController
   before_filter :ensure_game,       only:   [:guess, :eliminate, :won]
   before_filter :find_guess,        only:   [:guess, :eliminate]
 
+  rescue_from Koala::Facebook::APIError, OAuth2::Error do |exception|
+    notify_exception exception
+
+    if exception.kind_of?(OAuth2::Error) || (
+      exception.respond_to?(:fb_error_code) &&
+      exception.fb_error_code.to_i == 190)
+
+      new_game!
+      self.current_user = nil
+    end
+
+    if request.xhr?
+      head 500
+    else
+      redirect_to root_path
+    end
+  end
+
   # Displays the home page.
   #
   def index
@@ -14,12 +32,6 @@ class SiteController < ApplicationController
   #
   def play
     @friends = gather_friends_from(@game) if @game
-
-  rescue Koala::Facebook::APIError
-    new_game!
-    self.current_user = nil
-
-    redirect_to root_path
   end
 
   # AJAX Call
@@ -89,10 +101,7 @@ class SiteController < ApplicationController
       current_user.post_on_friend_wall(msg, @game.target_id, root_url)
       spam.touch
     rescue StandardError => e
-      if defined? ExceptionNotifier::Notifier
-        ExceptionNotifier::Notifier.exception_notification(
-          request.env, exception).deliver
-      end
+      notify_exception(e)
       nil
     end if spam.postable?
 

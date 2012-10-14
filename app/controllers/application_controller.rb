@@ -1,6 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  def notify_exception(exception)
+    if defined? ExceptionNotifier::Notifier
+      ExceptionNotifier::Notifier.exception_notification(
+        request.env, exception).deliver
+    end
+  end
+
   private
   def authenticate_user
     redirect_to '/auth/facebook' unless current_user
