@@ -5,6 +5,7 @@ class Spam < ActiveRecord::Base
   Threshold = 15.minutes
 
   def self.for(target)
+    target = target.to_s
     where(target_id: target).first ||
       create!(target_id: target, updated_at: Threshold.ago)
   end

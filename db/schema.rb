@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121014143714) do
+ActiveRecord::Schema.define(:version => 20121014233515) do
 
   create_table "games", :force => true do |t|
     t.integer  "user_id"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20121014143714) do
   end
 
   create_table "spams", :force => true do |t|
-    t.integer  "target_id"
+    t.string   "target_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
