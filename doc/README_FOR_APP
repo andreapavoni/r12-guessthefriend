@@ -7,5 +7,17 @@ some_friends= me.friends
 close_friends_id= me.friends_sample
 target_friend_id= me.friends_sample.sample
 target_friend= me.facebook.get_object(target_friend_id)
-new_target= User.find_by_name("Claudio Floreani").random_close_friend
+#new_target= User.find_by_name("Claudio Floreani").random_close_friend
+new_target= Friend.new(me,me.friends_sample.sample)
 new_target.suitable?
+me.facebook.put_connections("me", "feed", :message => "GuessTheFriend!")
+me.facebook.put_wall_post('An eye on the code, an eye on Linode, hands on the keyboard to fumble, 4 monkeys ready to RailsRumble @GuessTheFriend http://pic.twitter.com/KVAi9yqo')
+me.facebook.put_wall_post("Try this", {:name => "GuessTheFriend", :link => "http://arrr.r12.railsrumble.com/"}, "apavoni")
+
+begin
+  me.facebook.put_wall_post( "Try this",{ name:"GuessTheFriend", link:"http://arrr.r12.railsrumble.com/"}, new_traget.id )
+rescue Koala::Facebook::APIError
+  puts "You're not allowed to write on #{new_target.name}"
+end
+
+#Side note: put_wall_post posts to user/feeds, which doesn’t include a Share button. To get one when posting a link, you can use put_connections(user, “links”, hash_of_details).
