@@ -14,7 +14,7 @@ class SiteController < ApplicationController
     @game = Game.make(current_user, current_game) unless @game
 
   rescue Koala::Facebook::APIError
-    self.new_game!
+    new_game!
     self.current_user = nil
 
     redirect_to root_path
