@@ -12,6 +12,14 @@ module ApplicationHelper
     render partial: 'shared/twitter_button'
   end
 
+  def facebook_jssdk
+    render partial: 'shared/facebook_jssdk'
+  end
+  
+  def facebook_like
+    render partial: 'shared/facebook_like'
+  end
+  
   def login_path
     '/auth/facebook'
   end

@@ -9,10 +9,12 @@
 </head>
 <body>
 
+  <%= facebook_jssdk %>
+
   <a href="/" class="logo ir">Guess the Friend!</a>
 
   <div class="social-share">
-    <div class="facebook-like">FB Like</div>
+    <div class="facebook-like"><%= facebook_like %></div>
     <div class="tweet-count"><%= twitter_button %></div>
     <div class="google-plus-count"><g:plusone></g:plusone></div>
   </div>
