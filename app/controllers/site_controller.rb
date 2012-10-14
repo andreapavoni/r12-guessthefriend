@@ -20,11 +20,18 @@ class SiteController < ApplicationController
     render :json => @game.next_hint
   end
 
-  # Abandons the current game and redirects to the home page.
+  # Abandons the current game and starts a new one.
   #
   def restart
     new_game!
     redirect_to play_path
+  end
+
+  # Abandons the current game and redirects to the home page.
+  #
+  def abandon
+    new_game!
+    redirect_to root_path
   end
 
   # Called when an user eliminates a guess. If it is right, then
