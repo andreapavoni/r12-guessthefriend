@@ -124,7 +124,7 @@ $(function () {
         // Oh no, you guessed the wrong one ;-)
         // Reveal the right one and fail.
         $.ajax ({
-          url      : go.to ('reveal-url'),
+          url      : go.to ('reveal'),
           dataType : 'text',
           sync     : true,
           error    : Guesswho.on_error,
@@ -144,7 +144,7 @@ $(function () {
 
     if (confirm ('Sure, pal?')) {
       $.ajax ({
-        url      : go.to ('reveal-url'),
+        url      : go.to ('reveal'),
         dataType : 'text',
         sync     : true,
         error    : Guesswho.on_error,
@@ -158,11 +158,11 @@ $(function () {
 
   var go = {
     restart: function () {
-      this.go ('restart-url');
+      this.go ('restart');
     },
 
     abandon: function () {
-      this.go ('abandon-url');
+      this.go ('abandon');
     },
 
     go: function (url) {
@@ -170,7 +170,7 @@ $(function () {
     },
 
     to: function (url) {
-      return game.data (url);
+      return game.data (url + '-url');
     }
   };
 
