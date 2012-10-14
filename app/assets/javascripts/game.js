@@ -35,7 +35,7 @@ $(function () {
     if (confirm ('Wanna play again?'))
       go.restart ();
     else
-      go.home ();
+      go.abandon ();
   };
 
   var you_win = function () {
@@ -112,11 +112,11 @@ $(function () {
 
   var go = {
     restart: function () {
-      this.go('#restart-url');
+      this.go ('#restart-url');
     },
 
-    home: function () {
-      this.go ('#home-url');
+    abandon: function () {
+      this.go ('#abandon-url');
     },
 
     go: function (elem) {

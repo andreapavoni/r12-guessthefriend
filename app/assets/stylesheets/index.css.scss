@@ -1,6 +1,12 @@
 .home {
-
+  @extend .clearfix;
+  clear: left;
   margin-top: 40px;
+
+  .play {
+    margin: 40px auto;
+    text-align: center;
+  }
 
   .col-1-2 {
     > h1 {
@@ -11,6 +17,12 @@
   span.caption {
     text-align: center;
     display: block;
+  }
+
+  .signup {
+    clear: left;
+    margin-top: 40px auto 0;
+    text-align: center;
   }
 }
 

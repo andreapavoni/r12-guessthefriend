@@ -1,4 +1,5 @@
 module ApplicationHelper
+
   def google_analytics
     render partial: 'shared/google_analytics'
   end
@@ -10,4 +11,9 @@ module ApplicationHelper
   def twitter_button
     render partial: 'shared/twitter_button'
   end
+
+  def login_path
+    '/auth/facebook'
+  end
+
 end
