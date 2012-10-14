@@ -1,5 +1,5 @@
 <div class="col-1-2">
-<img src="/assets/unknown_friend.png"></img>
+<img src="/assets/unknown_friend.png /">
 <h1>Can you guess who is the misterious friend?</h1>
 <p>We are ready to make a bet with you.</p>
 <p>We'll show you a random bunch of your facebook friends,</p>

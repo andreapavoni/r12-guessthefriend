@@ -19,7 +19,12 @@
 </head>
 <body>
   <div class="hellobar">
-    <span class="rr12">RR12 - Vote for us!</span>
+    <span class="rr12">
+      <a href="http://railsrumble.com/entries/43-arrr">
+        <img src="/assets/logo-railsrumble-small.png" height=32 vspace=0 />
+        Had fun? Then favorite us for the Rails Rumble 2012!
+      </a>
+    </span>
     <% if current_user %>
       <div class="user">
         <img src="<%= current_user.profile_pic %>" alt="" />
