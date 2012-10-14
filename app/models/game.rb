@@ -37,9 +37,9 @@ class Game < ActiveRecord::Base
     # Find the Users ordered by their score
     def leaderboard
       self.joins(:user).
-        select('SUM(score) AS score, users.name, users.uid').
+        select('SUM(score) AS score, users.name, users.uid, users.oauth_token').
         where('score > 0').
-        group('users.name, users.uid').order('sum(score) desc')
+        group('users.name, users.uid, users.oauth_token').order('sum(score) desc')
     end
   end
 
