@@ -113,6 +113,11 @@ class SiteController < ApplicationController
   private
   def find_game
     @game = Game.by_token(current_game)
+
+    if @game.guesses.empty?
+      new_game!
+      @game = nil
+    end
   end
 
   def ensure_game
