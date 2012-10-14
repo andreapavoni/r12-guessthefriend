@@ -29,17 +29,21 @@ body {
   display: block;
   width: 203px;
   height: 203px;
-  margin: 10px auto;
+  margin: 20px auto;
   background-image: url('/assets/logo.png');
 }
 
 .social-share {
   width: 50%;
-  float: left;
+  float: right;
 
   .facebook-like, .tweet-count, .google-plus-count {
     float: left;
   }
+}
+
+.support-pages {
+	float: left;
 }
 
 .footer {
