@@ -104,8 +104,7 @@ $(function () {
   };
 
   var you_win = function (options) {
-    var target = $('.friend:not(.flipped)');
-    highlight (target.attr ('id')); // DIRTY
+    reveal (options.reveal)
 
     $.ajax ({
       type: 'PUT',
@@ -121,16 +120,12 @@ $(function () {
   // Reveals the mysterious friend
   //
   var reveal = function (id) {
-    $('.friend:not(#'+id+')').addClass ('flipped flip-animation');
-    highlight (id);
-  };
-
-  var highlight = function (id) {
+    // Highlight
     var target = $('#'+id).addClass ('highlighted');
-
+    // Flip and dim everyone else
+    $('.friend:not(#'+id+')').addClass ('flipped flip-animation dimmed');
+    // Scroll to
     $('html, body').animate ({'scrollTop': target.position().top - 150});
-
-    $('.friend:not(#'+id+')').addClass ('dimmed');
   };
 
   // API Client
@@ -172,12 +167,16 @@ $(function () {
       case 'MODE_ELIMINATE':
         // OK, hide the wrong one
         person.addClass ('flipped flip-animation');
-        if ($('.friend:not(.flipped)').length == 1)
-          you_win ({score: score});
+
+        // If only one remains, announce victory
+        var remaining = $('.friend:not(.flipped)');
+        if (remaining.length == 1)
+          you_win ({score: score, reveal: remaining.attr ('id')});
+
         break;
 
       case 'MODE_GUESS':
-        you_win ({score: score});
+        you_win ({score: score, reveal: person.attr ('id')});
         break;
       }
     },
