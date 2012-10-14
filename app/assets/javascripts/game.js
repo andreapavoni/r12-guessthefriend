@@ -9,6 +9,7 @@ Guesswho = {
 
 $(function () {
   var game = $('#game');
+  game.mode = 'MODE_ELIMINATE';
 
   // Next hint button
   //
@@ -30,9 +31,6 @@ $(function () {
       error: Guesswho.on_error
     });
   });
-
-  /* Elimination core */
-  var $mode = 'MODE_ELIMINATE';
 
   var you_lose = function (options) {
     reveal (options.reveal);
@@ -68,7 +66,7 @@ $(function () {
 
     var person = $(this);
     $.ajax ({
-      url: game.data ($mode == 'MODE_ELIMINATE' ? 'eliminate-url' : 'guess-url'),
+      url: game.data (game.mode == 'MODE_ELIMINATE' ? 'eliminate-url' : 'guess-url'),
 
       data: { id: person.attr ('id') },
 
@@ -88,7 +86,7 @@ $(function () {
 
   $(game).on ({
     'guesswho:success': function (event, person, score) {
-      switch($mode) {
+      switch(game.mode) {
       case 'MODE_ELIMINATE':
         // OK, hide the wrong one
         person.addClass ('flipped').addClass ('flip-animation');
@@ -103,7 +101,7 @@ $(function () {
     },
 
     'guesswho:failed': function (event, person, score) {
-      switch($mode) {
+      switch(game.mode) {
       case 'MODE_ELIMINATE':
         // Hide everyone except this one, that is the correct one.
         //
@@ -174,12 +172,12 @@ $(function () {
 
     event.preventDefault ();
 
-    if ($mode == 'MODE_ELIMINATE') {
-      $mode = 'MODE_GUESS';
+    if (game.mode == 'MODE_ELIMINATE') {
+      game.mode = 'MODE_GUESS';
       button.addClass ('active');
       label.text ('Ok, make your guess!');
     } else {
-      $mode = 'MODE_ELIMINATE';
+      game.mode = 'MODE_ELIMINATE';
       button.removeClass ('active');
       label.text (orig);
     }
