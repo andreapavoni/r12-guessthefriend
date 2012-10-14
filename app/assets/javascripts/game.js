@@ -70,6 +70,10 @@ $(function () {
 
       data: { id: person.attr ('id') },
 
+      beforeSend: function () {
+        person.addClass ('selected');
+      },
+
       statusCode: {
         200: function (score) {
           friends.trigger ('guesswho:success', [person, score]);

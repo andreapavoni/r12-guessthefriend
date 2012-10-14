@@ -34,6 +34,11 @@
       overflow: hidden;
       cursor: pointer;
 
+      &.selected {
+        box-shadow: #000 0px 0px 12px 4px;
+        transition: all 0.03s ease-in;
+      }
+
       &:nth-child(6n + 1) {
         clear: left;
       }
