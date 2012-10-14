@@ -52,22 +52,23 @@ $(function () {
 
   var dialog = function (selector, options) {
     var container = $(selector);
+    var buttons = $.extend ({}, options).buttons || {
+      'Close': function () {
+        go.abandon ();
+      },
+      'Play again!': function () {
+        go.restart ();
+      }
+    };
 
     container.dialog ({
       width     : 400,
       height    : 180,
-      modal     : true,
+      modal     : false,
       resizable : false,
       draggable : false,
       title     : container.find ('.title').text (),
-      buttons   : {
-        'Close': function () {
-          go.abandon ();
-        },
-        'Play again!': function () {
-          go.restart ();
-        }
-      },
+      buttons   : buttons,
 
       open: function () {
         container.find ('.score').text (options.score);
@@ -81,14 +82,16 @@ $(function () {
   var you_lose = function (options) {
     reveal (options.reveal);
 
-    dialog ('#lose-dialog', {
-      score: options.score,
-      open : function (container) {
-        container.find (
-          options.score == 0 ? '.no-points' : '.points'
-        ).show ();
-      }
-    });
+    setTimeout (function () { // FIXME use AnimationEnd event
+      dialog ('#lose-dialog', {
+        score: options.score,
+        open : function (container) {
+          container.find (
+            options.score == 0 ? '.no-points' : '.points'
+          ).show ();
+        }
+      });
+    }, 3000);
   };
 
   var you_win = function (options) {
@@ -183,25 +186,38 @@ $(function () {
     }
   });
 
-  // Router
-  //
   game.on ('click', '#new-game', function (event) {
     event.preventDefault ();
 
-    if (confirm ('Sure, pal?')) {
-      $.ajax ({
-        url      : go.to ('reveal'),
-        dataType : 'text',
-        sync     : true,
-        error    : Guesswho.on_error,
-        success  : function (id) {
-          reveal (id);
-          setTimeout (function () { go.restart () }, 1000);
+    dialog ('#abort-dialog', {
+      buttons: {
+        'Yes': function () {
+          $(this).dialog ('close');
+
+          $.ajax ({
+            url      : go.to ('reveal'),
+            dataType : 'text',
+            sync     : true,
+            error    : Guesswho.on_error,
+            success  : function (id) {
+              reveal (id);
+              setTimeout (function () {
+                dialog ('#another-try-dialog'); // CONVOLUTED
+              }, 3000);
+            }
+          });
+        },
+
+        'No': function (event) {
+          $(this).dialog ('close');
         }
-      });
-    }
+      }
+    })
+
   });
 
+  // Router
+  //
   var go = {
     restart: function () {
       this.go ('restart');
