@@ -24,14 +24,12 @@
   <div class="friends"
     data-eliminate-url="<%= eliminate_path %>"
     data-guess-url="<%= guess_path %>">
-    <% @game.people.each do |friend| %>
-      <%= content_tag :div, :class => 'friend', :id => friend['id'] do -%>
-        <div class="front">
-          <%= image_tag friend['pic'], alt: friend['name'] %>
-          <span title="<%= friend['name'] %>"><%= friend['name'] %></span>
-        </div>
-        <div class="back"></div>
-      <% end -%>
+    <% @friends.each do |friend| %>
+      <% if friend %>
+        <%= render 'friend', id: friend['id'], name: friend['name'], pic: friend['pic']  %>
+      <% else %>
+        <%= render 'flipped' %>
+      <% end %>
     <% end %>
   </div>
 

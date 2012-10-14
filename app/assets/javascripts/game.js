@@ -89,7 +89,7 @@ $(function () {
       switch($mode) {
       case 'MODE_ELIMINATE':
         // OK, hide the wrong one
-        person.addClass ('flipped');
+        person.addClass ('flipped').addClass ('flip-animation');
         if (people.filter (':not(.flipped)').length == 1)
           you_win ({score: score});
         break;

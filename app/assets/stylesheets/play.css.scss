@@ -33,7 +33,6 @@
       float: left;
       position: relative;
       cursor: pointer;
-      transition: 0.6s;
       transform-style: preserve-3d;
       box-shadow: rgba(0, 0, 0, 0.4) 0 5px 10px;
 
@@ -79,6 +78,9 @@
 
       &.flipped {
         transform: rotateX(180deg);
+        cursor: auto;
+      }
+      &.flip-animation {
         animation: show 0.4s ease-out;
       }
     }

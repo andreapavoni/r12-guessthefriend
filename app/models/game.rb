@@ -10,6 +10,10 @@ class Game < ActiveRecord::Base
   serialize :hints,   JSON
 
   class << self
+    def cards
+      24
+    end
+
     def by_token(token)
       where(token: token).first
     end
@@ -25,7 +29,7 @@ class Game < ActiveRecord::Base
         g.target = user.suitable_close_friend.to_h
 
         # Guesses
-        g.guesses = user.friends(limit: 23, except: g.target['id']).shuffle!
+        g.guesses = user.friends(limit: cards - 1, except: g.target['id']).shuffle!
 
         # Hints
         g.hints = Friend.new(User.find(user.id), g.target['id']).hints

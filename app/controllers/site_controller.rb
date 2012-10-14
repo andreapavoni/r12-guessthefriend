@@ -13,6 +13,12 @@ class SiteController < ApplicationController
   #
   def play
     @game = Game.make(current_user, current_game) unless @game
+    @friends = @game.people
+
+    if @friends.size < Game.cards
+      @friends.concat Array.new(Game.cards - @friends.size)
+      @friends.shuffle!
+    end
 
   rescue Koala::Facebook::APIError
     new_game!
