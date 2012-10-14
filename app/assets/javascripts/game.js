@@ -89,10 +89,9 @@ $(function () {
       switch($mode) {
       case 'MODE_ELIMINATE':
         // OK, hide the wrong one
-        person.fadeOut (function () {
-          if (people.filter (':visible').length == 1)
-            you_win ();
-        });
+        person.addClass ('flipped');
+        if (people.filter ('not(.flipped)').length == 1)
+          you_win ();
         break;
 
       case 'MODE_GUESS':
