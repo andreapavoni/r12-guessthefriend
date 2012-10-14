@@ -52,7 +52,8 @@ $(function () {
 
   var dialog = function (selector, options) {
     var container = $(selector);
-    var buttons = $.extend ({}, options).buttons || {
+    var options = $.extend ({}, options)
+    var buttons = options.buttons || {
       'Close': function () {
         go.abandon ();
       },
@@ -71,7 +72,8 @@ $(function () {
       buttons   : buttons,
 
       open: function () {
-        container.find ('.score').text (options.score);
+        if (options.score)
+          container.find ('.score').text (options.score);
 
         if (options.open)
           options.open.apply (this, [container]);
