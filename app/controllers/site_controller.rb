@@ -114,7 +114,7 @@ class SiteController < ApplicationController
   def find_game
     @game = Game.by_token(current_game)
 
-    if @game.guesses.empty?
+    if @game && @game.guesses.empty?
       new_game!
       @game = nil
     end
