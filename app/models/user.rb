@@ -93,6 +93,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  # Post a message on friend's wall
+  def post_on_friend_wall(msg, friend_id)
+    url = Rails.application.routes.url_helpers.root_url(host: APP_CONF[:host])
+
+    facebook.put_wall_post(msg, {name: "Guess The Friend", link: url}, friend_id)
+  end
+
   def profile_pic
     Rails.cache.fetch("user/#{uid}/profile_pic", expires_in: 864000, race_condition_ttl: 5) do
       self.facebook.get_object(:me, fields: :picture)['picture']['data']['url']
