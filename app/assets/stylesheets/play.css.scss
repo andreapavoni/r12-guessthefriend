@@ -39,26 +39,29 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 144px;
+        width: 148px;
         height: 178px;
         overflow: hidden;
+        border-radius: 5px;
         padding: 4px;
         backface-visibility: hidden;
       }
 
       > .front {
         z-index: 2;
+        background-color: #fff;
 
-        > img {
-          min-width: 100%;
-          min-height: 100%;
+        > .image {
+          width: 140px;
+          height: 170px;
+          background-size: cover;
         }
 
         > span {
           position: absolute;
           bottom: 4px;
           left: 4px;
-          width: 142px;
+          width: 140px;
           height: 30px;
           padding-top: 7px;
           background-color: rgba(0, 0, 0, 0.3);
