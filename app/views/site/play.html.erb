@@ -1,4 +1,26 @@
 <div class="play">
+  <div class="hint">
+    <h1>Hint:</h1>
+    <p id="hint"><%= @game.next_hint %></p>
+
+    <a href="#" class="button blue size-medium" id="i-got-it">
+      <span class="text">I got it!</span>
+    </span>
+
+    <a href="#" class="button blue size-medium" id="new-game">
+      <span class="text">I give up</span>
+    </a>
+
+    <a href="#" class="button blue size-medium" id="next-hint" data-url="<%= next_hint_path %>">
+      <span class="text">Next hint</span>
+    </a>
+
+    <input type="hidden" id="restart-url" value="<%= restart_path %>" />
+    <input type="hidden" id="abandon-url" value="<%= abandon_path %>" />
+    <input type="hidden" id="reveal-url" value="<%= reveal_path %>" />
+
+  </div>
+
   <div class="friends">
       <div class="friend">
         <div class="front">
