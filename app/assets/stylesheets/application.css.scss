@@ -26,10 +26,37 @@ body {
 }
 
 .hellobar {
-  height: 30px;
+  height: 40px;
+  padding: 0 20px;
   background-color: $base-color;
   border-bottom: 1px solid $dark-text-color;
   box-shadow: $highlight-color 0 -1px 0 0 inset, rgba(0, 0, 0, 0.5) 0 1px 5px 0;
+
+  .rr12 {
+    display: block;
+    float: left;
+    padding-top: 10px;
+    color: $light-text-color;
+  }
+
+  .user {
+    float: right;
+
+    > img {
+      width: 32px;
+      max-height: 32px;
+      margin-top: -5px;
+      bacgkround-size: cover;
+      border-radius: 5px;
+      border: 1px solid $dark-text-color;
+    }
+
+    > a {
+      display: inline-block;
+      margin-top: 10px;
+      color: $light-text-color;
+    }
+  }
 }
 
 .content {
