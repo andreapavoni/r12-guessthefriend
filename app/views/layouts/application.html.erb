@@ -8,6 +8,10 @@
   <%= google_analytics %>
 </head>
 <body>
+  <script type="text/javascript" src="//www.hellobar.com/hellobar.js"></script>
+  <script type="text/javascript">
+    new HelloBar(55455,79320);
+  </script>
 
   <%= facebook_jssdk %>
 
@@ -21,10 +25,8 @@
 
   <%= yield %>
 
-    <%# + GOOGLE +1 BUTTON + %>
     <%# For the best performance, put this code immediately after the last +1 tag. %>
     <%= google_plusone %>
-    <%# = GOOGLE +1 BUTTON = %>
 
     <div class="footer">
       <p>Guess the Friend! was built in less that 48 hours during the <a href="http://railsrumble.com/">2012 edition of Rails Rumble</a>.</p>
