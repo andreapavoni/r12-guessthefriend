@@ -23,7 +23,7 @@
   <strong>Have fun!</strong>
 </p>
 
-<div class="friends">
+<div class="friends clearfix">
   <% @friends.each do |friend| %>
     <% if friend %>
       <%= render 'friend', id: friend['id'], name: friend['name'], pic: friend['pic']  %>
