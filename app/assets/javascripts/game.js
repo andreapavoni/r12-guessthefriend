@@ -65,7 +65,7 @@ $(function () {
     container.dialog ({
       width     : 400,
       height    : 180,
-      modal     : false,
+      modal     : true,
       resizable : false,
       draggable : false,
       title     : container.find ('.title').text (),
@@ -119,7 +119,10 @@ $(function () {
   };
 
   var highlight = function (id) {
-    $('#'+id).addClass ('highlighted');
+    var target = $('#'+id).addClass ('highlighted');
+
+    $('html, body').animate ({'scrollTop': target.position().top - 150});
+
     $('.friend:not(#'+id+')').addClass ('dimmed');
   };
 
