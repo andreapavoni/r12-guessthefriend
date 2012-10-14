@@ -86,8 +86,7 @@ class SiteController < ApplicationController
 
     begin
       msg = 'I guessed you on Guess The Friend, try to beat me!'
-      Rails.logger.info "WOULD HAVE POSTED #{msg} on #{target_id} for #{root_url}"
-      #current_user.post_on_friend_wall(msg, target_id, root_url)
+      current_user.post_on_friend_wall(msg, @game.target_id, root_url)
       spam.touch
     rescue StandardError => e
       if defined? ExceptionNotifier::Notifier

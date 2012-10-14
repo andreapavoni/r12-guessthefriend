@@ -1,6 +1,6 @@
 # Used to track posts on a friend wall
 class Spam < ActiveRecord::Base
-  attr_accessible :target_id
+  attr_accessible :target_id, :updated_at
 
   Threshold = 15.minutes
 
