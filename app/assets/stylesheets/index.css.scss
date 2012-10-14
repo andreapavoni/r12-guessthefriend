@@ -53,6 +53,8 @@
         margin-right: 10px;
         float: left;
         background-size: cover;
+        border-radius: 5px;
+        border: 1px solid $dark-text-color;
       }
 
       > h3 {
@@ -92,6 +94,11 @@
 
         &:last-child {
           margin-bottom: 0;
+        }
+
+        img {
+          border-radius: 5px;
+          border: 1px solid $dark-text-color;
         }
       }
     }
