@@ -127,8 +127,18 @@ $(function () {
   //
   var restart = $('#new-game');
   restart.click (function () {
-    if (confirm ('Sure, pal?'))
-      go.restart ();
+    if (confirm ('Sure, pal?')) {
+      $.ajax ({
+        url      : go.to ('#reveal-url'),
+        dataType : 'text',
+        sync     : true,
+        error    : oh_so_sorry,
+        success  : function (id) {
+          reveal (id);
+          setTimeout (function () { go.restart () }, 1000);
+        }
+      });
+    }
   });
 
   var go = {
