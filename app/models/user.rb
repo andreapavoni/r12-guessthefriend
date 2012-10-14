@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
 
   attr_accessible :name, :oauth_expires_at, :oauth_token, :provider, :uid
 
+  after_create :profile_pic
+
   class << self
     def from_omniauth(auth)
       where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
@@ -84,6 +86,12 @@ class User < ActiveRecord::Base
       friends = friends.sort_by(&:last)
       friends.delete(self.uid)
       friends.map!(&:first).reverse!
+    end
+  end
+
+  def profile_pic
+    Rails.cache.fetch("user/#{uid}/profile_pic", expires_in: 86400 , race_condition_ttl: 5) do
+      self.facebook.get_object(:me, fields: :picture)['picture']['data']['url']
     end
   end
 

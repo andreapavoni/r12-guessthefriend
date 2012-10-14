@@ -2,11 +2,13 @@
 
 <table>
   <th>
+    <td></td>
     <td>Name</td>
     <td>Points</td>
   </th>
   <% @players.each do |player| %>
   <tr>
+    <td><%= image_tag Rails.cache.fetch("user/#{player.uid}/profile_pic") %></td>
     <td><%= player.name %></td>
     <td><%= player.score %></td>
   </tr>
