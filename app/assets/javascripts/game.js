@@ -95,6 +95,9 @@ $(function () {
   };
 
   var you_win = function (options) {
+    var target = $('.friend:not(.flipped)');
+    highlight (target.attr ('id')); // DIRTY
+
     $.ajax ({
       type: 'PUT',
       url : go.to ('won')
@@ -109,8 +112,14 @@ $(function () {
   // Reveals the mysterious friend
   //
   var reveal = function (id) {
-    $('.friend:not([id='+id+'])').fadeOut ();
-  }
+    $('.friend:not(#'+id+')').addClass ('flipped flip-animation');
+    highlight (id);
+  };
+
+  var highlight = function (id) {
+    $('#'+id).addClass ('highlighted');
+    $('.friend:not(#'+id+')').addClass ('dimmed');
+  };
 
   // API Client
   //
