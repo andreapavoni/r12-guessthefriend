@@ -30,10 +30,18 @@ class SiteController < ApplicationController
   end
 
   # Starts a new game if no current game is in progress, or
-  # resumes the last played game.
+  # resumes the last played game. But - if the current game
+  # is empty, remove it and start a new one.
   #
   def play
-    @friends = gather_friends_from(@game) if @game
+    if @game
+      if @game.guesses.present?
+        @friends = gather_friends_from(@game)
+      else
+        new_game!
+        @game = nil
+      end
+    end
   end
 
   # AJAX Call
@@ -113,11 +121,6 @@ class SiteController < ApplicationController
   private
   def find_game
     @game = Game.by_token(current_game)
-
-    if @game && @game.guesses.empty?
-      new_game!
-      @game = nil
-    end
   end
 
   def ensure_game
