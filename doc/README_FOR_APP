@@ -4,8 +4,8 @@ Run "rake doc:app" to generate API documentation for your models, controllers, h
 Console testing walkthrough
 me= User.find_by_name("Claudio Floreani")
 some_friends= me.friends
-close_friends_id= me.possibly_close_friends
-target_friend_id= me.possibly_close_friends.sample
+close_friends_id= me.friends_sample
+target_friend_id= me.friends_sample.sample
 target_friend= me.facebook.get_object(target_friend_id)
 new_target= User.find_by_name("Claudio Floreani").random_close_friend
 new_target.suitable?
