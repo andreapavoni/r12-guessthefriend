@@ -86,21 +86,22 @@ $(function () {
       buttons: {
         'OK': function () {
           $(this).dialog ('close');
+
           reveal (options.reveal);
+
+          setTimeout (function () { // FIXME use AnimationEnd event
+            dialog ('#lose-dialog', {
+              score: options.score,
+              open : function (container) {
+                container.find (
+                  options.score == 0 ? '.no-points' : '.points'
+                ).show ();
+              }
+            });
+          }, 3000);
         }
       }
     });
-
-    setTimeout (function () { // FIXME use AnimationEnd event
-      dialog ('#lose-dialog', {
-        score: options.score,
-        open : function (container) {
-          container.find (
-            options.score == 0 ? '.no-points' : '.points'
-          ).show ();
-        }
-      });
-    }, 3000);
   };
 
   var you_win = function (options) {
