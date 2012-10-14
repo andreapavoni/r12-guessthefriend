@@ -86,6 +86,7 @@
 
       > li {
         margin: 15px 0;
+        clear: left;
         list-style: none;
 
         &:first-child {
@@ -97,8 +98,15 @@
         }
 
         img {
+          float: left;
           border-radius: 5px;
           border: 1px solid $dark-text-color;
+        }
+
+        span {
+          float: left;
+          margin-top: 15px;
+          margin-left: 5px;
         }
       }
     }

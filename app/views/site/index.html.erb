@@ -77,10 +77,12 @@
       <h3>Leaderboard</h3>
       <ul>
         <% @players.each do |player| %>
-          <li>
+          <li class="clearfix">
             <%= image_tag profile_pic_for(player.uid, player.oauth_token), alt: player.name, size: '48x48' %>
-            <%= player.name %>,
-            <%= player.score %> points.
+            <span>
+              <%= player.name %>,
+              <%= player.score %> points.
+            </span>
           </li>
         <% end %>
       </ul>
