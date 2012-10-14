@@ -73,7 +73,20 @@
 
       .back {
         transform: rotateY(180deg);
-        background-color: red;
+        background-color: $base-color;
+        background-image: url('/assets/card-background.png');
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 75px;
+          height: 76px;
+          margin-top: -38px;
+          margin-left: -37px;
+          background-image: url('/assets/card-logo.png');
+        }
       }
 
       &.flipped {
