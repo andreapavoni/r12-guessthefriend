@@ -29,22 +29,20 @@
   <div class="content" role="main">
     <%= add_social :facebook_jssdk %>
 
-    <div class="navigation">
-      <div class="support-pages">
-        <a href="http://guessthefriend.tumblr.com">Tumblr</a>
-        <a href="https://twitter.com/GuessTheFriend">Twitter</a>
+    <div class="header">
+      <div>
+        <a href="/" class="logo ir">Guess the Friend!</a>
       </div>
-      <div class="social-share">
-        <div class="facebook-like"><%= add_social :facebook_like %></div>
-        <div class="tweet-count"><%= add_social :twitter_button %></div>
-        <div class="google-plus-count"><g:plusone></g:plusone></div>
-        <%# For the best performance, put this code immediately after the last +1 tag. %>
-        <%= add_social :google_plusone %>
-      </div>
-    </div>
 
-    <div>
-      <a href="/" class="logo ir">Guess the Friend!</a>
+      <div class="navigation">
+        <a href="<%= leaderboard_path %>">Leaderboard</a>
+          <a href="http://guessthefriend.tumblr.com">Tumblr</a>
+          <div class="facebook-like"><%= add_social :facebook_like %></div>
+          <div class="tweet-count"><%= add_social :twitter_button %></div>
+          <div class="google-plus-count"><g:plusone></g:plusone></div>
+          <%# For the best performance, put this code immediately after the last +1 tag. %>
+          <%= add_social :google_plusone %>
+      </div>
     </div>
 
     <%= yield %>

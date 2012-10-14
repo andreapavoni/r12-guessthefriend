@@ -41,25 +41,31 @@ body {
   border-bottom-radius: 5px;
 }
 
-.logo {
-  display: block;
-  width: 203px;
-  height: 203px;
-  margin: 20px auto;
-  background-image: url('/assets/logo.png');
-}
+.header {
+  height: 100px;
+  margin-top: 20px;
+  margin-bottom: 80px;
+  position: relative;
 
-.social-share {
-  width: 50%;
-  float: right;
-
-  .facebook-like, .tweet-count, .google-plus-count {
+  .logo {
+    display: block;
     float: left;
+    width: 101px;
+    height: 101px;
+    margin-left: 20px;
+    background-image: url('/assets/logo.png');
   }
-}
 
-.support-pages {
-	float: left;
+  .navigation {
+    float: right;
+    position: relative;
+    right: -5px;
+    background-color: $base-color;
+
+    .facebook-like, .tweet-count, .google-plus-count {
+      float: left;
+    }
+  }
 }
 
 .footer {
