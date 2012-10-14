@@ -172,11 +172,11 @@ $(function () {
 
   // Mode switcher
   //
+  game.mode = 'MODE_ELIMINATE';
+  game.addClass ('eliminating');
+
   (function () {
     var label, orig;
-
-    game.mode = 'MODE_ELIMINATE';
-    game.addClass ('guessing');
 
     game.on ('click', '#i-got-it', function (event) {
       if (!game.switcher) {
