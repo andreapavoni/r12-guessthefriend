@@ -45,6 +45,11 @@ $(function () {
   };
 
   var you_win = function (options) {
+    $.ajax ({
+      type: 'PUT',
+      url : go.to ('won')
+    });
+
     alert ('FOR THE WIN!!!11 You scored '+options.score+' points on this game!');
 
     if (confirm ('Wanna play again?'))

@@ -17,5 +17,5 @@ Guesswho::Application.routes.draw do
   get '/g/restart', to: 'site#restart',   as: :restart
   get '/g/next',    to: 'site#hint',      as: :next_hint
   get '/g/epicfail',to: 'site#reveal',    as: :reveal
-  get '/g/won',     to: 'site#won',       as: :won
+  put '/g/ftw',     to: 'site#won',       as: :won
 end
