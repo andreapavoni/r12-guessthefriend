@@ -15,11 +15,14 @@
  *= require_tree .
  */
 
+@import "colors.scss";
+
 body {
   max-width: 1024px;
   margin: 0 auto;
   background-image: url('/assets/background.png');
   font-family: "Myriad Pro", "Helvetica", sans-serif;
+  color: $dark-text-color;
 }
 
 .logo {
@@ -36,6 +39,16 @@ body {
 
   .facebook-like, .tweet-count, .google-plus-count {
     float: left;
+  }
+}
+
+.footer {
+  margin: 80px auto 40px;
+  text-align: center;
+
+  > p {
+    margin: 5px 0;
+    font-size: 14px;
   }
 }
 
