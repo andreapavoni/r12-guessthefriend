@@ -69,20 +69,17 @@
     font-size: 40px;
 
     > .text {
-      line-height: 40px;
+      line-height: 80px;
     }
   }
 
-  &.icon-facebook {
-
-    > .text {
-      padding-top: 9px;
-    }
+  &.size-maxi.icon-facebook {
 
     > .icon {
       display: inline-block;
       width: 69px;
       height: 69px;
+      margin-top: -7px;
       background-image: url('/assets/facebook_logo.png');
     }
   }
