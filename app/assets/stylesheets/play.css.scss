@@ -54,6 +54,16 @@
       display: inline-block;
       margin-top: -20px;
       margin-left: 15px;
+
+      .got-it {
+        font-weight: bold;
+        color: $dark-green;
+      }
+
+      .give-up {
+        font-weight: bold;
+        color: $dark-red;
+      }
     }
 
     > p {
