@@ -111,13 +111,24 @@ body {
   margin-bottom: 80px;
   position: relative;
 
-  .logo {
-    display: block;
+  > .logo-wrapper {
     float: left;
-    width: 101px;
-    height: 101px;
     margin-left: 20px;
-    background-image: url('/assets/logo.png');
+
+    > .logo {
+      display: block;
+      float: left;
+      width: 101px;
+      height: 101px;
+      background-image: url('/assets/logo.png');
+    }
+
+    > h1 {
+      margin-top: 35px;
+      margin-left: 15px;
+      float: left;
+      font-size: 27px;
+    }
   }
 }
 
