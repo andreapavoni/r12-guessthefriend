@@ -26,6 +26,10 @@ body {
   color: $dark-text-color;
 }
 
+a, a:visited {
+  color: $base-color;
+}
+
 .hellobar {
   height: 40px;
   padding: 0 20px;
