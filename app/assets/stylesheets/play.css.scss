@@ -49,11 +49,9 @@
   }
 
   .help {
-    width: 40%;
-    margin: 0;
     font-style: italic;
     display: inline-block;
-    color: #444;
+    color: $dark-text-color;
   }
 
   .friends {

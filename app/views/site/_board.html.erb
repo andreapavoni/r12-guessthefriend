@@ -1,27 +1,31 @@
-<div class="hint">
-  <h1>Hint:</h1>
-  <p id="hint"><%= @game.next_hint %></p>
+<div class="grid grid-pad">
+  <div class="col-1-2- hint">
+    <h1>Hint:</h1>
+    <p id="hint"><%= @game.next_hint %></p>
 
-  <a href="#" class="button blue size-medium" id="i-got-it">
-    <span class="text">I got it!</span>
-  </span>
+    <a href="#" class="button blue size-medium" id="i-got-it">
+      <span class="text">I got it!</span>
+    </span>
 
-  <a href="#" class="button blue size-medium" id="new-game">
-    <span class="text">I give up</span>
-  </a>
+    <a href="#" class="button blue size-medium" id="new-game">
+      <span class="text">I give up</span>
+    </a>
 
-  <a href="#" class="button blue size-medium" id="next-hint" data-url="<%= next_hint_path %>" data-target="#hint">
-    <span class="text">Next hint</span>
-  </a>
+    <a href="#" class="button blue size-medium" id="next-hint" data-url="<%= next_hint_path %>" data-target="#hint">
+      <span class="text">Next hint</span>
+    </a>
+  </div>
+
+  <div class="col-2-2">
+    <p class="help">
+      Eliminate unlikely matches by clicking on their photo.<br/>
+      You can ask for a new hint using the <strong>Next hint</strong> button.<br/>
+      For bonus points, identify the friend in advance using the <strong>I got it!</strong> button.<br/>
+
+      <strong>Have fun!</strong>
+    </p>
+  </div>
 </div>
-
-<p class="help">
-  Eliminate unlikely matches by clicking on their photo.<br/>
-  You can ask for a new hint using the <strong>Next hint</strong> button.<br/>
-  For bonus points, identify the friend in advance using the <strong>I got it!</strong> button.<br/>
-
-  <strong>Have fun!</strong>
-</p>
 
 <div class="friends clearfix">
   <% @friends.each do |friend| %>
