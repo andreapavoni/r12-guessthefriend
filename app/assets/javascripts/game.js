@@ -67,7 +67,7 @@ $(function () {
       height       : 240,
       modal        : true,
       resizable    : false,
-      draggable    : false,
+      draggable    : true,
       closeOnEscape: false,
       dialogClass  : 'noclose',
       title        : container.find ('.title').text (),
