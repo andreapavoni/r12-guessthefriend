@@ -24,8 +24,11 @@
   <div class="friends">
     <% @game.people.each do |friend| %>
       <%= content_tag :div, :class => 'friend', :id => friend['id'], 'data-url' => eliminate_path(friend['id']) do -%>
-        <%= image_tag friend['pic'], alt: friend['name'] %>
-        <span title="<%= friend['name'] %>"><%= friend['name'] %></span>
+        <div class="card front">
+          <%= image_tag friend['pic'], alt: friend['name'] %>
+          <span title="<%= friend['name'] %>"><%= friend['name'] %></span>
+        </div>
+        <div class="card back"></div>
       <% end -%>
     <% end %>
   </div>

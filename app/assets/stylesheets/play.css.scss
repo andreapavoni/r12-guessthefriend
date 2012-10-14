@@ -21,6 +21,7 @@
 
   .friends {
     margin-top: 40px;
+    perspective: 2000;
 
     > .friend {
       width: 160px;
@@ -33,32 +34,73 @@
       position: relative;
       overflow: hidden;
       cursor: pointer;
+      position: relative;
+      transform-style: preserve-3d;
+      box-shadow: rgba(0,0,0,0.6) 0 5px 10px;
 
       &:nth-child(6n + 1) {
         clear: left;
       }
 
-      > img {
-        min-width: 100%;
-        min-height: 100%;
-      }
-
-      > span {
+      > .card {
         position: absolute;
-        bottom: 0;
+        top: 0;
         left: 0;
         width: 100%;
-        height: 30px;
-        padding-top: 7px;
-        background-color: rgba(0, 0, 0, 0.3);
-        color: #fff;
-        text-shadow: #000 0 0 1px;
-        text-align: center;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+        height: 100%;
+        backface-visibility: hidden;
       }
 
+      > .front {
+        z-index: -1;
+
+        > img {
+          min-width: 100%;
+          min-height: 100%;
+        }
+
+        > span {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 30px;
+          padding-top: 7px;
+          background-color: rgba(0, 0, 0, 0.3);
+          color: #fff;
+          text-shadow: #000 0 0 1px;
+          text-align: center;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+
+      .back {
+        z-index: 1;
+        transform: rotateY(180deg);
+        background-color: red;
+      }
+
+      &.flipped {
+        transform: rotateY(180deg);
+        animation: show 0.9s ease-out;
+      }
     }
   }
 }
+
+@keyframes show {
+  from {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-100px);
+  }
+
+  to {
+    transform: translateY(0px) rotateX(180deg);
+  }
+}
+
