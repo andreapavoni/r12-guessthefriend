@@ -28,7 +28,7 @@
     </span>
     <% if current_user %>
       <div class="user">
-        <img src="<%= current_user.profile_pic %>" alt="" />
+        <div style="background-image: url('<%= current_user.profile_pic %>');" class="avatar"></div>
         <a href="<%= signout_path %>" class="user-sinout"><%= current_user.name %>, signout</a>
       </div>
     <% end %>

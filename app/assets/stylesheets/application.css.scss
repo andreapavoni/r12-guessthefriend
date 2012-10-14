@@ -73,18 +73,21 @@ a, a:visited {
   .user {
     float: right;
 
-    > img {
+    > .avatar {
       width: 32px;
-      max-height: 32px;
-      margin-top: -5px;
+      height: 32px;
+      display: inline-block;
       background-size: cover;
       border-radius: 5px;
+      margin-top: 3px;
       border: 1px solid $dark-text-color;
     }
 
     > a {
       display: inline-block;
       margin-top: 10px;
+      position: relative;
+      top: -9px;
     }
   }
 }
