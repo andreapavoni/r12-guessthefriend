@@ -2,7 +2,9 @@
 
   <% if current_user %>
     <div class="play">
-      <%= link_to "#{current_user.name}, guess your friend!", "/play", class: "button" %>
+      <%= link_to play_path, class: "button blue size-maxi" do %>
+        <span class="text"><%= current_user.name %>, guess your friend!</span>
+      <% end %>
     </div>
   <% end %>
 
