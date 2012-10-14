@@ -175,10 +175,12 @@ $(function () {
     if (game.mode == 'MODE_ELIMINATE') {
       game.mode = 'MODE_GUESS';
       button.addClass ('active');
+      game.removeClass ('eliminating').addClass ('guessing');
       label.text ('Ok, make your guess!');
     } else {
       game.mode = 'MODE_ELIMINATE';
       button.removeClass ('active');
+      game.removeClass ('guessing').addClass ('eliminating');
       label.text (orig);
     }
   });
