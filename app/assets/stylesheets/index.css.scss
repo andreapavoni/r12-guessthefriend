@@ -4,12 +4,12 @@
   margin-top: 40px;
   color:#0b2f87;
 
-  .play {
+  .signup, .play-game {
     margin: 40px auto;
     text-align: center;
   }
 
-  .col-1-2 {
+  .description {
     > h1 {
       margin-top: 0;
       color:#0b2f87;
@@ -17,6 +17,7 @@
       font-weight:bold;
       text-align:center;
     }
+
     > img {
       float:left;
     }
@@ -32,5 +33,11 @@
     margin-top: 40px auto 0;
     text-align: center;
   }
+
+  .team {}
+
+  .rails-48 {}
+
+  .leaderbord {}
 }
 
