@@ -1,37 +1,12 @@
-<div class="play clearfix">
-  <div class="hint">
-    <h1>Hint:</h1>
-    <p id="hint"><%= @game.next_hint %></p>
-
-    <a href="#" class="button blue size-medium" id="i-got-it">
-      <span class="text">I got it!</span>
-    </span>
-
-    <a href="#" class="button blue size-medium" id="new-game">
-      <span class="text">I give up</span>
-    </a>
-
-    <a href="#" class="button blue size-medium" id="next-hint" data-url="<%= next_hint_path %>">
-      <span class="text">Next hint</span>
-    </a>
-
-    <input type="hidden" id="restart-url" value="<%= restart_path %>" />
-    <input type="hidden" id="abandon-url" value="<%= abandon_path %>" />
-    <input type="hidden" id="reveal-url" value="<%= reveal_path %>" />
-
-  </div>
-
-  <div class="friends"
-    data-eliminate-url="<%= eliminate_path %>"
-    data-guess-url="<%= guess_path %>">
-    <% @game.people.each do |friend| %>
-      <%= content_tag :div, :class => 'friend', :id => friend['id'] do -%>
-        <div class="card front">
-          <%= image_tag friend['pic'], alt: friend['name'] %>
-          <span title="<%= friend['name'] %>"><%= friend['name'] %></span>
+<div class="play">
+  <div class="friends">
+      <div class="friend">
+        <div class="front">
+          <!-- front content -->
         </div>
-        <div class="card back"></div>
-      <% end -%>
-    <% end %>
+        <div class="back">
+          <!-- back content -->
+        </div>
+      </div>
   </div>
 </div>
