@@ -1,6 +1,7 @@
 class SiteController < ApplicationController
   before_filter :authenticate_user, except: [:index]
   before_filter :find_game,         except: [:index]
+  before_filter :find_guess,        only:   [:guess, :eliminate]
 
   # Displays the home page.
   #
@@ -43,19 +44,21 @@ class SiteController < ApplicationController
   # Called when an user eliminates a guess. If it is right, then
   # 200 is returned, else 418 - I'm a Teapot ;-).
   #
+  # Renders the current game score as text.
+  #
   # Params:
   #
   #  * id: Facebook User ID of the guess to be eliminated.
   #
   def eliminate
-    head :bad_request and return unless params[:id].present?
+    status = @game.eliminate!(@guess) ? :ok : 418
+    render :text => @game.score, :status => status
+  end
 
-    if params[:id] ==  @game.target_id
-      head(418)
-    else
-      @game.update_score!
-      head(:ok)
-    end
+  # Guesses the mysterious friend.
+  def guess
+    status = @game.guess!(@guess) ? :ok : 418
+    render :text => @game.score, :status => status
   end
 
   # Reveals who is the mysterious friend to guess. This sucks, as
@@ -73,6 +76,14 @@ class SiteController < ApplicationController
   private
   def find_game
     @game = Game.by_token(current_game)
+  end
+
+  def find_guess
+    @guess = params[:id]
+
+    if @guess.blank? || !@game.valid_guess?(@guess)
+      head :bad_request
+    end
   end
 
 end

@@ -1,7 +1,7 @@
 class Game < ActiveRecord::Base
   belongs_to :user
 
-  validates :target, :guesses, :user_id, presence: true
+  validates :target, :user_id, presence: true
 
   attr_accessible :hints
 
@@ -61,11 +61,40 @@ class Game < ActiveRecord::Base
     hints[current_hint]
   end
 
-  # Updates score for the current game
-  def update_score!(points=1)
+  def valid_guess?(guess)
+    guess == target_id || guesses.find {|g| g['id'] == guess.to_i}
+  end
+
+  def eliminate!(id)
     transaction do
-      self.increment!(:score, points)
-      self
+      if id == target_id
+        guesses.clear
+      else
+        guesses.reject! {|g| g['id'] == id.to_i}
+        update_score!(1)
+      end
+      save!
     end
+
+    return id != target_id
+  end
+
+  def guess!(id)
+    transaction do
+      if id == target_id
+        update_score!(guesses.size * 10)
+      end
+      guesses.clear
+      save!
+    end
+
+    return id == self.target_id
+  end
+
+  private
+  # Updates score for the game, incrementing it by the given number of points
+  #
+  def update_score!(points)
+    increment!(:score, points)
   end
 end

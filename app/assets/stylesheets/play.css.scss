@@ -38,6 +38,11 @@
       transform-style: preserve-3d;
       box-shadow: rgba(0,0,0,0.6) 0 5px 10px;
 
+      &.selected {
+        box-shadow: #000 0px 0px 12px 4px;
+        transition: all 0.03s ease-in;
+      }
+
       &:nth-child(6n + 1) {
         clear: left;
       }

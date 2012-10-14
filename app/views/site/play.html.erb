@@ -21,9 +21,11 @@
 
   </div>
 
-  <div class="friends">
+  <div class="friends"
+    data-eliminate-url="<%= eliminate_path %>"
+    data-guess-url="<%= guess_path %>">
     <% @game.people.each do |friend| %>
-      <%= content_tag :div, :class => 'friend', :id => friend['id'], 'data-url' => eliminate_path(friend['id']) do -%>
+      <%= content_tag :div, :class => 'friend', :id => friend['id'] do -%>
         <div class="card front">
           <%= image_tag friend['pic'], alt: friend['name'] %>
           <span title="<%= friend['name'] %>"><%= friend['name'] %></span>

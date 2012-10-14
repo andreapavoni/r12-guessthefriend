@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
   # Returns an Array of Facebook user IDs.
   #
   def friends_sample
-    Rails.cache.fetch("user/#{uid}/friends_sample", :expires_in => 300, :race_condition_ttl => 5) do
+    Rails.cache.fetch("user/#{uid}/friends_sample", :expires_in => 120, :race_condition_ttl => 5) do
 
       filter = lambda {|u| u.present? && u['name'] != 'Facebook User' }
 
@@ -89,8 +89,7 @@ class User < ActiveRecord::Base
       other_friends = facebook.get_connections('me', 'friends', :fields => 'id')
       other_friends.map! {|x| x['id']}.shuffle!
 
-      close_friends + other_friends.take(10)
-
+      close_friends + other_friends.take(15)
     end
   end
 

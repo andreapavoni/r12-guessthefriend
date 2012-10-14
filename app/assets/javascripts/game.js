@@ -35,7 +35,7 @@ $(function () {
     reveal (options.reveal);
 
     setTimeout (function () {
-      alert ('YOO L0SE!');
+      alert ('YOO L0SE! You scored '+options.score+' points, anyway');
 
       if (confirm ('Wanna play again?'))
         go.restart ();
@@ -44,8 +44,8 @@ $(function () {
     }, 1000);
   };
 
-  var you_win = function () {
-    alert ('FOR THE WIN!!!11');
+  var you_win = function (options) {
+    alert ('FOR THE WIN!!!11 You scored '+options.score+' points on this game!');
 
     if (confirm ('Wanna play again?'))
       go.restart ();
@@ -60,23 +60,27 @@ $(function () {
 
   // API Client
   //
-  var root = $('body');
-  var people = $('.friend');
-  $('.friends').on ('click', '.friend', function (event) {
+  var people = $('.friend'), friends = $('.friends');
+  friends.on ('click', '.friend', function (event) {
     event.preventDefault ();
 
     var person = $(this);
     $.ajax ({
-      url: person.data ('url'),
-      data: { id: person.data ('id') },
+      url: friends.data ($mode == 'MODE_ELIMINATE' ? 'eliminate-url' : 'guess-url'),
+
+      data: { id: person.attr ('id') },
+
+      beforeSend: function () {
+        person.addClass ('selected');
+      },
 
       statusCode: {
-        200: function () {
-          $(root).trigger ('guesswho:excluded', [person]);
+        200: function (score) {
+          friends.trigger ('guesswho:success', [person, score]);
         },
 
-        418: function () { // YOU'RE A TEAPOT
-          $(root).trigger ('guesswho:guessed', [person]);
+        418: function (jqXHR) { // YOU'RE A TEAPOT
+          friends.trigger ('guesswho:failed', [person, jqXHR.responseText]);
         },
 
         500: oh_so_sorry
@@ -84,14 +88,28 @@ $(function () {
     });
   });
 
-  $(root).bind({
-    'guesswho:excluded': function (event, person) {
+  $(friends).bind({
+    'guesswho:success': function (event, person, score) {
       switch($mode) {
       case 'MODE_ELIMINATE':
         // OK, hide the wrong one
         person.addClass ('flipped');
         if (people.filter ('not(.flipped)').length == 1)
-          you_win ();
+          you_win ({score: score});
+        break;
+
+      case 'MODE_GUESS':
+        you_win ({score: score});
+        break;
+      }
+    },
+
+    'guesswho:failed': function (event, person, score) {
+      switch($mode) {
+      case 'MODE_ELIMINATE':
+        // Hide everyone except this one, that is the correct one.
+        //
+        you_lose ({score: score, reveal: person.attr ('id')});
         break;
 
       case 'MODE_GUESS':
@@ -103,24 +121,9 @@ $(function () {
           sync     : true,
           error    : oh_so_sorry,
           success  : function (id) {
-            you_lose ({reveal: id});
+            you_lose ({score: score, reveal: id});
           }
         });
-
-        break;
-      }
-    },
-
-    'guesswho:guessed': function (event, person) {
-      switch($mode) {
-      case 'MODE_ELIMINATE':
-        // Hide everyone except this one, that is the correct one.
-        //
-        you_lose ({reveal: person.attr ('id')});
-        break;
-
-      case 'MODE_GUESS':
-        you_win ();
         break;
       }
     }
