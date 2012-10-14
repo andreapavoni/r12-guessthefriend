@@ -55,6 +55,12 @@
           <span class="text">Sign in with Facebook</span>
         <% end %>
     </div>
+  <% else %>
+    <div class="signup">
+        <%= link_to play_path, id: "sign_in", class: "button blue size-maxi" do %>
+          <span class="text">Play the game</span>
+        <% end %>
+    </div>
   <% end %>
 
 </div>
