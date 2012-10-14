@@ -8,11 +8,31 @@
   text-align: center;
   text-decoration: none;
 
+  > .icon {
+    margin-right: 10px;
+  }
+
+  > .text, > .icon {
+    vertical-align: middle;
+    display: inline-block;
+  }
+
+  &::before {
+    content: '';
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
   &.blue {
     background-color: $base-color;
     border-color: $dark-text-color;
-    color: $light-text-color;
-    text-shadow: $dark-text-color 0 2px 0;
+    box-shadow: $highlight-color 0 1px 0 0 inset;
+
+    > .text {
+      color: $light-text-color;
+      text-shadow: $dark-text-color 0 2px 0;
+    }
   }
 
   &.size-maxi {
@@ -20,20 +40,23 @@
     border-width: 2px;
     padding: 10px 20px;
     font-size: 40px;
+
+    > .text {
+      line-height: 40px;
+    }
   }
 
   &.icon-facebook {
-    line-height: 69px;
-    vertical-align: middle;
 
-    &::before {
-      content: '';
+    > .text {
+      padding-top: 9px;
+    }
+
+    > .icon {
       display: inline-block;
       width: 69px;
       height: 69px;
-      margin-right: 10px;
       background-image: url('/assets/facebook_logo.png');
-      vertical-align: middle;
     }
   }
 }

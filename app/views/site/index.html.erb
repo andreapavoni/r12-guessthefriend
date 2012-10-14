@@ -23,7 +23,10 @@
 
   <% if !current_user %>
     <div class="signup">
-        <%= link_to "Connect with Facebook", "/auth/facebook", id: "sign_in", class: "button blue size-maxi icon-facebook" %>
+        <%= link_to login_path, id: "sign_in", class: "button blue size-maxi icon-facebook" do %>
+          <span class="icon"></span>
+          <span class="text">Sign in with Facebook</span>
+        <% end %>
     </div>
   <% end %>
 
