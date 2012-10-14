@@ -12,24 +12,43 @@ $(function () {
 
   // Next hint button
   //
-  game.on ('click', '#next-hint', function (event) {
-    event.preventDefault ();
+  (function () {
+    var target, label, orig;
 
-    var elem = $(this);
-    var hint = $('#hint'); // TODO OPTIMIZE
+    game.on ('click', '#next-hint', function (event) {
+      event.preventDefault ();
 
-    $.ajax ({
-      dataType: 'text',
-      type    : 'get',
-      url     : elem.data ('url'),
+      if (!game.hinter) {
+        game.hinter = $(this);
 
-      success : function (data) {
-        hint.text (data);
-      },
+        target = $(game.hinter.data ('target'));
+        label  = game.hinter.find ('.text');
+        orig   = label.text ();
+      }
 
-      error: Guesswho.on_error
+      $.ajax ({
+        dataType: 'text',
+        type    : 'get',
+        url     : game.hinter.data ('url'),
+
+        beforeSend: function () {
+          label.text ('Loading...');
+          target.addClass ('loading');
+        },
+
+        complete: function () {
+          label.text (orig);
+          target.removeClass ('loading');
+        },
+
+        success : function (data) {
+          target.text (data);
+        },
+
+        error: Guesswho.on_error
+      });
     });
-  });
+  }) ();
 
   var you_lose = function (options) {
     reveal (options.reveal);

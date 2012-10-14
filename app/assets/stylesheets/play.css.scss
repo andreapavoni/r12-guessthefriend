@@ -38,7 +38,12 @@
     > p {
       margin: 10px 0;
       font-size: 22px;
+
+      &.loading {
+        opacity: 0.5;
+      }
     }
+
   }
 
   .friends {
@@ -140,10 +145,10 @@
         animation: show 0.4s ease-out;
       }
 
-        &.loading {
-          opacity: 0.5;
-          cursor: progress;
-        }
+      &.loading {
+        opacity: 0.5;
+        cursor: progress;
+      }
     }
   }
 
