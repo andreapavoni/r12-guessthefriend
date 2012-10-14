@@ -70,10 +70,6 @@ $(function () {
 
       data: { id: person.attr ('id') },
 
-      beforeSend: function () {
-        person.addClass ('selected');
-      },
-
       statusCode: {
         200: function (score) {
           friends.trigger ('guesswho:success', [person, score]);
@@ -94,7 +90,7 @@ $(function () {
       case 'MODE_ELIMINATE':
         // OK, hide the wrong one
         person.addClass ('flipped');
-        if (people.filter ('not(.flipped)').length == 1)
+        if (people.filter (':not(.flipped)').length == 1)
           you_win ({score: score});
         break;
 
