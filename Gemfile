@@ -31,4 +31,5 @@ end
 group :production do
   gem 'unicorn'
   gem 'memcache-client'
+  gem 'exception_notification'
 end
