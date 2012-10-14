@@ -8,7 +8,6 @@ Guesswho::Application.routes.draw do
 
   root to: 'site#index'
   get '/play', to: 'site#play'
-  get '/leaderboard', to: 'site#leaderboard'
 
   get '/g/make',    to: 'site#stalk',     as: :make_game
   get '/g/del',     to: 'site#eliminate', as: :eliminate

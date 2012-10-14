@@ -26,6 +26,7 @@ class SiteController < ApplicationController
   # Displays the home page.
   #
   def index
+    @players = Game.leaderboard.limit(10)
   end
 
   # Starts a new game if no current game is in progress, or
@@ -109,10 +110,6 @@ class SiteController < ApplicationController
     end if spam.postable?
 
     head(:no_content)
-  end
-
-  def leaderboard
-    @players = Game.leaderboard.limit(20)
   end
 
   private

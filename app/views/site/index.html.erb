@@ -51,16 +51,21 @@
   </div>
 
   <div class="col-2-3">
-    <h2>48rails challenge</h2>
+    <h3>48rails challenge</h3>
     <p>
     48 rails  is an event organized by  Programmers in Padua, the developers community of Padova, to participate in the RailsRaumble 2012
     </p>
   </div>
 
   <div class="col-3-3">
-    <a class="twitter-timeline" href="https://twitter.com/GuessTheFriend" data-widget-id="257533143286939648">Tweets by @GuessTheFriend</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
+    <h3>Leaderboard</h3>
+    <ul>
+      <% @players.each do |player| %>
+        <%= image_tag profile_pic_for(player.uid, player.oauth_token), alt: player.name, size: '48x48' %>
+        <%= player.name %>
+        <%= player.score %>
+      <% end %>
+    </ul>
   </div>
 
 </div>
