@@ -94,9 +94,7 @@ class User < ActiveRecord::Base
   end
 
   # Post a message on friend's wall
-  def post_on_friend_wall(msg, friend_id)
-    url = Rails.application.routes.url_helpers.root_url(host: APP_CONF[:host])
-
+  def post_on_friend_wall(msg, friend_id, url)
     facebook.put_wall_post(msg, {name: "Guess The Friend", link: url}, friend_id)
   end
 
