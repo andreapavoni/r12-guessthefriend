@@ -1,17 +1,36 @@
 <div class="home clearfix">
 
+  <div class="col-1-2">
+    <h1>Can you guess who is the misterious friend?</h1>
+    <p>We are ready to make a bet with you.</p>
+    <p>We'll show you a random bunch of your facebook friends,</p>
+    <p>and we'll give you some hints about one amongst them.</p>
+    <p>After every hint we'll allow you to discard those that don't match.</p>
+    <p>How many times will you able to guess the misterious friend?</p>
+    <p>We bet you'll be surprised to know how many things you don't know about your friends!</p>
+  </div>
+
+  <div class="col-2-2">
+    <iframe src="http://player.vimeo.com/video/1193166?title=1&amp;byline=1&amp;portrait=1" width="500" height="377" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></p>
+  </div>
+
   <% if !current_user %>
     <div class="signup">
-        <%= link_to login_path, id: "sign_in", class: "button blue size-maxi icon-facebook" do %>
-          <span class="icon"></span>
-          <span class="text">Sign in with Facebook</span>
-        <% end %>
+      <%= link_to login_path, id: "sign_in", class: "button blue size-maxi icon-facebook" do %>
+        <span class="icon"></span>
+        <span class="text">Sign in with Facebook</span>
+      <% end %>
     </div>
   <% else %>
     <div class="play-game">
+      <%= link_to play_path, id: "sign_in", class: "button blue size-maxi" do %>
+        <span class="text">Play the game</span>
+      <% end %>
+      <div class="signup">
         <%= link_to play_path, id: "sign_in", class: "button blue size-maxi" do %>
           <span class="text">Play the game</span>
         <% end %>
+      </div>
     </div>
   <% end %>
 
