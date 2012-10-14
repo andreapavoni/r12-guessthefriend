@@ -32,7 +32,6 @@ class SiteController < ApplicationController
   # resumes the last played game.
   #
   def play
-    raise OmniAuth::Strategies::OAuth2::CallbackError.new("foo")
     @friends = gather_friends_from(@game) if @game
   end
 
