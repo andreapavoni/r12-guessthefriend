@@ -81,13 +81,13 @@ class SiteController < ApplicationController
   # friend's facebook wall.
   # We take care to not spam too much :-)
   def won
-    target_id = @game.target['id']
-    spam = Spam.where(target_id: target_id).first_or_create
-    msg = 'I guessed you on Guess The Friend, try to beat me!'
+    spam = Spam.for(@game.target_id)
 
     if spam.postable?
-      current_user.post_on_friend_wall(msg, target_id, root_url)
-      spam.save!
+      spam.touch
+      msg = 'I guessed you on Guess The Friend, try to beat me!'
+      Rails.logger.info "WOULD HAVE POSTED #{msg} on #{target_id} for #{root_url}"
+      #current_user.post_on_friend_wall(msg, target_id, root_url)
     end
 
     head(:no_content)
