@@ -92,11 +92,13 @@ a, a:visited {
 .navigation {
   height: 30px;
   margin-top: 35px;
-  padding: 5px;
+  padding: 5px 5px 5px 15px;
   float: right;
   position: relative;
   right: -11px;
   background-color: $base-color;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
 
   &::after {
     content: '';
@@ -124,7 +126,8 @@ a, a:visited {
   padding-bottom: 40px;
   background-color: $content-white;
   border: 1px solid $content-gray;
-  border-bottom-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .header {
