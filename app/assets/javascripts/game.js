@@ -159,7 +159,7 @@ $(function () {
       switch(game.mode) {
       case 'MODE_ELIMINATE':
         // OK, hide the wrong one
-        person.addClass ('flipped').addClass ('flip-animation');
+        person.addClass ('flipped flip-animation');
         if ($('.friend:not(.flipped)').length == 1)
           you_win ({score: score});
         break;
