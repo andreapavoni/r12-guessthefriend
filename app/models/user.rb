@@ -94,7 +94,7 @@ class User < ActiveRecord::Base
   end
 
   def profile_pic
-    Rails.cache.fetch("user/#{uid}/profile_pic", expires_in: 86400 , race_condition_ttl: 5) do
+    Rails.cache.fetch("user/#{uid}/profile_pic", expires_in: 864000, race_condition_ttl: 5) do
       self.facebook.get_object(:me, fields: :picture)['picture']['data']['url']
     end
   end
