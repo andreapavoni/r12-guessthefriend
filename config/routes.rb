@@ -10,6 +10,7 @@ Guesswho::Application.routes.draw do
   get '/play', to: 'site#play'
   get '/leaderboard', to: 'site#leaderboard'
 
+  get '/g/make',    to: 'site#stalk',     as: :make_game
   get '/g/del',     to: 'site#eliminate', as: :eliminate
   get '/g/guess',   to: 'site#guess',     as: :guess
   get '/g/abandon', to: 'site#abandon',   as: :abandon

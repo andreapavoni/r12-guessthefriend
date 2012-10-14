@@ -1,36 +1,17 @@
-<div class="play clearfix">
-  <div class="hint">
-    <h1>Hint:</h1>
-    <p id="hint"><%= @game.next_hint %></p>
+<div id="game" class="play clearfix"
+  data-eliminate-url="<%= eliminate_path %>"
+  data-guess-url="<%= guess_path %>"
+  data-restart-url="<%= restart_path %>"
+  data-abandon-url="<%= abandon_path %>"
+  data-reveal-url="<%= reveal_path %>" />
 
-    <a href="#" class="button blue size-medium" id="i-got-it">
-      <span class="text">I got it!</span>
-    </span>
-
-    <a href="#" class="button blue size-medium" id="new-game">
-      <span class="text">I give up</span>
-    </a>
-
-    <a href="#" class="button blue size-medium" id="next-hint" data-url="<%= next_hint_path %>">
-      <span class="text">Next hint</span>
-    </a>
-
-    <input type="hidden" id="restart-url" value="<%= restart_path %>" />
-    <input type="hidden" id="abandon-url" value="<%= abandon_path %>" />
-    <input type="hidden" id="reveal-url" value="<%= reveal_path %>" />
-
-  </div>
-
-  <div class="friends"
-    data-eliminate-url="<%= eliminate_path %>"
-    data-guess-url="<%= guess_path %>">
-    <% @friends.each do |friend| %>
-      <% if friend %>
-        <%= render 'friend', id: friend['id'], name: friend['name'], pic: friend['pic']  %>
-      <% else %>
-        <%= render 'flipped' %>
-      <% end %>
-    <% end %>
-  </div>
+  <% if @game %>
+    <%= render 'board' %>
+  <% else %>
+    <h2 id="stalk" data-url="<%= make_game_path %>" data-target="#game">
+      I'm stalking your friends - please be patient... ;-)
+    </h2>
+    <!-- SPINNER PLEASE! :-D -->
+  <% end %>
 
 </div>

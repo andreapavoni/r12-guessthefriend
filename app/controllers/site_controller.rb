@@ -12,19 +12,21 @@ class SiteController < ApplicationController
   # resumes the last played game.
   #
   def play
-    @game = Game.make(current_user, current_game) unless @game
-    @friends = @game.people
-
-    if @friends.size < Game.cards
-      @friends.concat Array.new(Game.cards - @friends.size)
-      @friends.shuffle!
-    end
+    @friends = gather_friends_from(@game) if @game
 
   rescue Koala::Facebook::APIError
     new_game!
     self.current_user = nil
 
     redirect_to root_path
+  end
+
+  # AJAX Call
+  def stalk
+    @game    = Game.make(current_user, current_game)
+    @friends = gather_friends_from(@game)
+
+    render :partial => 'board'
   end
 
   # Returns the next hint for the current game as a JSON string.
@@ -90,6 +92,17 @@ class SiteController < ApplicationController
     if @guess.blank? || !@game.valid_guess?(@guess)
       head :bad_request
     end
+  end
+
+  def gather_friends_from(game)
+    friends = game.people
+
+    if friends.size < Game.cards
+      friends.concat Array.new(Game.cards - friends.size)
+      friends.shuffle!
+    end
+
+    return friends
   end
 
 end

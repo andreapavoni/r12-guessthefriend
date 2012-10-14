@@ -1,19 +1,22 @@
 // Game Engine.
 //
-$(function () {
-  var oh_so_sorry = function () {
+
+Guesswho = {
+  on_error: function () {
     alert ("Aw, Snap! Something went wrong - we apologize -_-");
-  };
+  }
+};
+
+$(function () {
+  var game = $('#game');
 
   // Next hint button
   //
-  var hint = $('#hint');
-  var roll = $('#next-hint');
-
-  roll.click (function (event) {
+  game.on ('click', '#next-hint', function (event) {
     event.preventDefault ();
 
     var elem = $(this);
+    var hint = $('#hint'); // TODO OPTIMIZE
 
     $.ajax ({
       dataType: 'text',
@@ -24,7 +27,7 @@ $(function () {
         hint.text (data);
       },
 
-      error: oh_so_sorry
+      error: Guesswho.on_error
     });
   });
 
@@ -55,42 +58,41 @@ $(function () {
   // Reveals the mysterious friend
   //
   var reveal = function (id) {
-    people.filter (':not([id='+id+'])').fadeOut ();
+    $('.friend:not([id='+id+'])').fadeOut ();
   }
 
   // API Client
   //
-  var people = $('.friend'), friends = $('.friends');
-  friends.on ('click', '.friend', function (event) {
+  game.on ('click', '.friend', function (event) {
     event.preventDefault ();
 
     var person = $(this);
     $.ajax ({
-      url: friends.data ($mode == 'MODE_ELIMINATE' ? 'eliminate-url' : 'guess-url'),
+      url: game.data ($mode == 'MODE_ELIMINATE' ? 'eliminate-url' : 'guess-url'),
 
       data: { id: person.attr ('id') },
 
       statusCode: {
         200: function (score) {
-          friends.trigger ('guesswho:success', [person, score]);
+          game.trigger ('guesswho:success', [person, score]);
         },
 
         418: function (jqXHR) { // YOU'RE A TEAPOT
-          friends.trigger ('guesswho:failed', [person, jqXHR.responseText]);
+          game.trigger ('guesswho:failed', [person, jqXHR.responseText]);
         },
 
-        500: oh_so_sorry
+        500: Guesswho.on_error
       },
     });
   });
 
-  $(friends).bind({
+  $(game).on ({
     'guesswho:success': function (event, person, score) {
       switch($mode) {
       case 'MODE_ELIMINATE':
         // OK, hide the wrong one
         person.addClass ('flipped').addClass ('flip-animation');
-        if (people.filter (':not(.flipped)').length == 1)
+        if ($('.friend:not(.flipped)').length == 1)
           you_win ({score: score});
         break;
 
@@ -112,10 +114,10 @@ $(function () {
         // Oh no, you guessed the wrong one ;-)
         // Reveal the right one and fail.
         $.ajax ({
-          url      : go.to ('#reveal-url'),
+          url      : go.to ('reveal-url'),
           dataType : 'text',
           sync     : true,
-          error    : oh_so_sorry,
+          error    : Guesswho.on_error,
           success  : function (id) {
             you_lose ({score: score, reveal: id});
           }
@@ -127,16 +129,15 @@ $(function () {
 
   // Router
   //
-  var restart = $('#new-game');
-  restart.click (function (event) {
+  game.on ('click', '#new-game', function (event) {
     event.preventDefault ();
 
     if (confirm ('Sure, pal?')) {
       $.ajax ({
-        url      : go.to ('#reveal-url'),
+        url      : go.to ('reveal-url'),
         dataType : 'text',
         sync     : true,
-        error    : oh_so_sorry,
+        error    : Guesswho.on_error,
         success  : function (id) {
           reveal (id);
           setTimeout (function () { go.restart () }, 1000);
@@ -147,27 +148,27 @@ $(function () {
 
   var go = {
     restart: function () {
-      this.go ('#restart-url');
+      this.go ('restart-url');
     },
 
     abandon: function () {
-      this.go ('#abandon-url');
+      this.go ('abandon-url');
     },
 
-    go: function (elem) {
-      window.location.href = this.to (elem);
+    go: function (url) {
+      window.location.href = this.to (url);
     },
 
-    to: function (elem) {
-      return $(elem).val ();
+    to: function (url) {
+      return game.data (url);
     }
   };
 
 
   // Mode switcher
   //
-  (function () {
-    var button = $('#i-got-it');
+  game.on ('click', '#i-got-it', function (event) {
+    var button = $(this);
     var label  = button.find ('.text');
     var orig   = label.text ();
 
@@ -184,5 +185,5 @@ $(function () {
         label.text (orig);
       }
     });
-  })();
+  });
 });
