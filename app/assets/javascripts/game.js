@@ -63,7 +63,7 @@ $(function () {
     };
 
     container.dialog ({
-      width        : 400,
+      width        : 420,
       height       : 240,
       modal        : true,
       resizable    : false,
