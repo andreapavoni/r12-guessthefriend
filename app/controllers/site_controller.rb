@@ -1,6 +1,7 @@
 class SiteController < ApplicationController
   before_filter :authenticate_user, except: [:index]
   before_filter :find_game,         except: [:index]
+  before_filter :ensure_game,       only:   [:guess, :eliminate, :won]
   before_filter :find_guess,        only:   [:guess, :eliminate]
 
   # Displays the home page.
@@ -81,8 +82,6 @@ class SiteController < ApplicationController
   # friend's facebook wall.
   # We take care to not spam too much :-)
   def won
-    head :bad_request and return unless @game
-
     spam = Spam.for(@game.target_id)
 
     if spam.postable?
@@ -102,6 +101,10 @@ class SiteController < ApplicationController
   private
   def find_game
     @game = Game.by_token(current_game)
+  end
+
+  def ensure_game
+    head :bad_request unless @game
   end
 
   def find_guess
