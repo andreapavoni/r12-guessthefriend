@@ -23,6 +23,16 @@
     }
   }
 
+  .video {
+    overflow: hidden;
+
+    > iframe {
+      width: 100%;
+      min-height: 300px;
+      margin-top: 25px;
+    }
+  }
+
   span.caption {
     text-align: center;
     display: block;
