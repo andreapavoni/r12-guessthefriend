@@ -72,7 +72,7 @@ class Friend
   def to_h
     {'id'  => id,
     'name' => name,
-    'pic'  => @api.get_object(id, :fields => 'picture')['picture']['data']['url']}
+    'pic'  => @api.get_object(id, :fields => 'picture.type(large)')['picture']['data']['url']}
   end
 
   private
