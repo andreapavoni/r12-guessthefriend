@@ -60,6 +60,10 @@ class SiteController < ApplicationController
     render :json => @game.target_id
   end
 
+  def leaderboard
+    @players = Game.leaderboard.limit(20)
+  end
+
   private
   def find_game
     @game = Game.by_token(current_game)
