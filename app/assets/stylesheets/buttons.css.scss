@@ -35,6 +35,29 @@
     }
   }
 
+  &.green {
+    background-color: $green;
+    border-color: $dark-green;
+    box-shadow: $green-highlight 0 1px 0 0 inset;
+
+    > .text {
+      color: $green-light-text;
+      text-shadow: $dark-green 0 2px 0;
+    }
+
+  }
+
+  &.red {
+    background-color: $red;
+    border-color: $dark-red;
+    box-shadow: $red-highlight 0 1px 0 0 inset;
+
+    > .text {
+      color: $red-light-text;
+      text-shadow: $dark-red 0 2px 0;
+    }
+  }
+
   &.size-medium {
     border-width: 1px;
   }
