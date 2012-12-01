@@ -1,4 +1,4 @@
-worker_processes 8
+worker_processes 4
 timeout 300
 
 # Load rails app into the master before forking workers

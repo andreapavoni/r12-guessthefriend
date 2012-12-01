@@ -29,7 +29,7 @@ require 'bundler/capistrano'
 #############################################
 
 GITHUB_REPOSITORY_NAME = 'r12-team-43'
-LINODE_SERVER_HOSTNAME = '198.74.58.152'
+SINDRO_SERVER_HOSTNAME = 'i.sindro.me'
 
 #############################################
 #############################################
@@ -39,16 +39,17 @@ LINODE_SERVER_HOSTNAME = '198.74.58.152'
 set :bundle_flags,               "--deployment"
 
 set :application,                "guesswho"
-set :deploy_to,                  "/home/rails"
+set :deploy_to,                  "/home/httpd/guesswho"
 set :normalize_asset_timestamps, false
 set :rails_env,                  "production"
 
-set :user,                       "rails"
-set :runner,                     "rails"
-set :admin_runner,               "rails"
+set :user,                       "guesswho"
+set :runner,                     "guesswho"
+set :admin_runner,               "guesswho"
 
 ssh_options[:forward_agent] = true
 ssh_options[:auth_methods]  = %w( publickey )
+ssh_options[:port]          = 46774
 
 # SCM Options
 set :scm,        :git
@@ -57,8 +58,8 @@ set :branch,     fetch(:branch, "master")
 set :use_sudo,   false
 
 # Roles
-role :app, LINODE_SERVER_HOSTNAME
-role :db,  LINODE_SERVER_HOSTNAME, :primary => true
+role :app, SINDRO_SERVER_HOSTNAME
+role :db,  SINDRO_SERVER_HOSTNAME, :primary => true
 
 # Add Configuration Files & Compile Assets
 after 'deploy:update_code' do
