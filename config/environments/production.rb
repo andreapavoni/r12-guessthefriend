@@ -67,7 +67,7 @@ Guesswho::Application.configure do
 
   config.middleware.use ExceptionNotifier,
     :email_prefix => "[GuessWho] ",
-    :sender_address => %{"rails@arrr.r12.railsrumble.com" },
+    :sender_address => %{guesswho@sindro.me},
     :exception_recipients => %w{vjt@openssl.it}
 
 end
