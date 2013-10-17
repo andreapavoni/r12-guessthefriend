@@ -99,13 +99,46 @@ class User < ActiveRecord::Base
   end
 
   def profile_pic
-    Rails.cache.fetch("user/#{uid}/profile_pic", expires_in: 864000, race_condition_ttl: 5) do
-      self.facebook.get_object(:me, fields: 'picture.type(large)')['picture']['data']['url']
+    Rails.cache.fetch("user/#{uid}/profile_pic", expires_in: 7200, race_condition_ttl: 5) do
+      begin
+        self.class.facebook.get_object(self.uid, fields: 'picture.type(large)')['picture']['data']['url']
+      rescue Koala::Facebook::APIError
+        'about:blank' # FIXME
+      end
     end
   end
 
-  # Facebook API wrapper
+  # Facebook API wrapper bound to this user
+  #
   def facebook
-    @api ||= Koala::Facebook::API.new(self.oauth_token)
+    @api ||= begin
+      refresh_access_token!
+      Koala::Facebook::API.new(self.oauth_token)
+    end
   end
+
+  def refresh_access_token!
+    # Checks the saved expiry time against the current time
+    if (self.oauth_expires_at - 2.minutes).past?
+
+      # Get the new token
+      new_token = self.class.facebook_oauth.exchange_access_token_info(self.oauth_token)
+
+      # Save the new token and its expiry over the old one
+      self.oauth_token      = new_token['access_token']
+      self.oauth_expires_at = new_token['expires']
+
+      save!
+    end
+  end
+
+  def self.facebook_oauth
+    @facebook_oauth ||= Koala::Facebook::OAuth.new(APP_CONF[:facebook][:app_id], APP_CONF[:facebook][:secret])
+  end
+
+  # A client unbound to any user, to fetch profile pics
+  def self.facebook
+    @facebook ||= Koala::Facebook::API.new
+  end
+
 end
