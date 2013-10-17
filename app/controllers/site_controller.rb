@@ -18,8 +18,10 @@ class SiteController < ApplicationController
 
     if request.xhr?
       head 500
-    else
+    elsif request.path != root_path
       redirect_to root_path
+    else
+      render 'public/500.html'
     end
   end
 
