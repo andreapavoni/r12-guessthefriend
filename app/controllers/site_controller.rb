@@ -102,21 +102,9 @@ class SiteController < ApplicationController
     render :json => @game.target_id
   end
 
-  # Get noticed that player won a game. So we post on
-  # friend's facebook wall.
-  # We take care to not spam too much :-)
+  # Nothing for now - this used to spam friends' walls.
+  # See the git log for the code...
   def won
-    spam = Spam.for(@game.target_id)
-
-    begin
-      msg = 'I guessed you on Guess The Friend, try to beat me!'
-      current_user.post_on_friend_wall(msg, @game.target_id, root_url)
-      spam.touch
-    rescue StandardError => e
-      notify_exception(e)
-      nil
-    end if spam.postable?
-
     head(:no_content)
   end
 
