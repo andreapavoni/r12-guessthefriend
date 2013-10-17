@@ -2,7 +2,7 @@
 class Spam < ActiveRecord::Base
   attr_accessible :target_id, :updated_at
 
-  Threshold = 12.hours
+  Threshold = 7.days
 
   def self.for(target)
     target = target.to_s
