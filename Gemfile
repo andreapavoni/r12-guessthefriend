@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
-
-gem 'mysql', '~> 2.8.1'
+gem 'rails', '3.2.14'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
@@ -17,8 +15,8 @@ gem 'koala', '~> 1.5.0'
 gem 'yajl-ruby', require: 'yajl/json_gem'
 
 group :development do
-  gem 'capistrano'
-  gem 'debugger'
+  gem 'capistrano', '~> 2.0'
+  gem 'byebug'
   gem 'pry'
   gem 'pry-rails'
 end
@@ -27,4 +25,5 @@ group :production do
   gem 'unicorn'
   gem 'memcache-client'
   gem 'exception_notification'
+  gem 'mysql', '~> 2.8.1'
 end
