@@ -1,0 +1,19 @@
+facebook_keys: &facebook
+  facebook:
+    app_id: 'YOUR_FB_APP_ID'
+    secret: 'YOUR_FB_APP_SECRET'
+
+google_analytics: &google_analytics
+  google_analytics: 'YOUR_GA_ACCOUNT'
+
+development:
+  <<: *facebook
+  <<: *google_analytics
+
+test:
+  <<: *facebook
+  <<: *google_analytics
+
+production:
+  <<: *facebook
+  <<: *google_analytics

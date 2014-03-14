@@ -10,19 +10,28 @@ hints :smile:.
 Everything is in the RailsRumble aftermath state - so don't expect clean code and full coverage - it is left
 here just for posterity :smiley:.
 
-App setup:
+App setup
 ----------
 
 * Clone the repo
-* Add "127.0.0.1 dev.r12.railsrumble.com" to your /etc/hosts (as root)
-* mkdir log/
+* mkdir `log/`
+* Configure `config/database.yml` using `config/database.yml.example` as a template
 * bundle
-* rails server
-* Go to http://dev.r12.railsrumble.com:3000/ - required to work around FB auth strictness
+* `rails server`
 
-App deploy:
------------
+Facebook setup
+--------------
 
-* Give your SSH key to vjt@openssl.it
+* Create a new facebook app and assign it a domain. Say, `example.com`
+* Create `config/config.yml` using `config/config.example.yml` as a template
+* Add `127.0.0.1 guesswho.example.com` to your `/etc/hosts` (as root)
+* Go to http://guesswho.example.com:3000/
+
+App deploy
+----------
+
+* Set up `config/deploy.rb` for your server - the current config assumes
+  there's a `guesswho` user on it and a process manager keeping an `unicorn`
+  up. An example `upstart` configuration is in `config/upstart.conf`.
 * cap deploy
 * If you want to deploy another branch, use `cap -S branch=foobar deploy`
