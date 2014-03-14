@@ -16,8 +16,9 @@ App setup
 * Clone the repo
 * mkdir `log/`
 * Configure `config/database.yml` using `config/database.yml.example` as a template
-* bundle
-* `rails server`
+* Run `bundle`
+* Run `rake db:setup`
+* Run `rails server`
 
 Facebook setup
 --------------
