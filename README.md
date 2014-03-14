@@ -1,7 +1,8 @@
 Guess The Friend - [:game_die: Click here to play](http://i.sindro.me)
 ======================================================================
 
-This is a complete Rails app developed in 48 hours during the 2012 [Rails Rumble](http://railsrumble.com).
+This is a complete Rails app developed in 48 hours during the 2012 [Rails Rumble](http://railsrumble.com), in
+the context of the [48Rails](http://48rails.it)
 
 It implements the classic [Guess The Friend](http://player.vimeo.com/video/1193166?title=1&byline=1&portrait=1)
 game, picking the choices from your recently contacted Facebook friends, getting their details and giving you
@@ -36,3 +37,11 @@ App deploy
   up. An example `upstart` configuration is in `config/upstart.conf`.
 * cap deploy
 * If you want to deploy another branch, use `cap -S branch=foobar deploy`
+
+Authors
+-------
+
+* Andrea Pavoni [@apeacox](https://github.com/apeacox)
+* Alessandro Vendruscono [@vendruscolo](https://github.com/vendruscolo)
+* Claudio Floreani [@ClaudioFloreani](https://github.com/ClaudioFloreani)
+* Marcello Barnaba [@vjt](https://github.com/vjt)
