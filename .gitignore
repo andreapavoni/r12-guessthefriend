@@ -17,6 +17,7 @@
 /bin
 
 /config/database.yml
+/config/config.yml
 
 /public/assets
 /public/system
