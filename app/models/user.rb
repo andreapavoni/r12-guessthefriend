@@ -103,7 +103,7 @@ class User < ActiveRecord::Base
       begin
         self.class.facebook.get_object(self.uid, fields: 'picture.type(large)')['picture']['data']['url']
       rescue Koala::Facebook::APIError
-        'about:blank' # FIXME
+        'https://upload.wikimedia.org/wikipedia/commons/0/09/Man_Silhouette.png'
       end
     end
   end
